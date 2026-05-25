@@ -17,7 +17,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>{children}</body>
+      <body className="bg-background text-foreground min-h-screen">
+        {children}
+      </body>
     </html>
   );
 }
