@@ -25,18 +25,20 @@ This portfolio demonstrates my ability to design and implement production-grade 
 ## Technical Skills
 
 ### Frontend
-- :contentReference[oaicite:0]{index=0} (App Router, SSR, Server Components)
-- :contentReference[oaicite:1]{index=1}
-- :contentReference[oaicite:2]{index=2}
-- :contentReference[oaicite:3]{index=3}
+- Next.js (App Router, SSR, Server Components)
+- React
+- TypeScript
+- Modern React patterns
 
 ### UI & Design System
-- :contentReference[oaicite:4]{index=4}
-- :contentReference[oaicite:5]{index=5}
-- :contentReference[oaicite:6]{index=6}
+- shadcn/ui (component system based on Radix primitives)
+- Radix UI (headless UI primitives)
+- Tailwind CSS (utility-first styling system)
 
 ### Animation & UX
-- :contentReference[oaicite:7]{index=7}
+- Framer Motion (UI animations and transitions)
+- Micro-interactions
+- Responsive UX patterns
 
 ### Tools & Practices
 - Git / GitHub
