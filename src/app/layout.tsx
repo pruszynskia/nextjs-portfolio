@@ -8,7 +8,22 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Andrzej Pruszyński | Frontend Developer",
-  description: "Senior Frontend Developer Portfolio",
+  description:
+    "Senior Frontend Developer specializing in React, Next.js and scalable frontend architectures.",
+  keywords: [
+    "Frontend Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "UI Engineer",
+  ],
+  openGraph: {
+    title: "Andrzej Pruszyński Portfolio",
+    description: "Senior Frontend Developer Portfolio",
+    url: "https://your-domain.com",
+    siteName: "Portfolio",
+    type: "website",
+  },
 };
 
 type RootLayoutProps = {
