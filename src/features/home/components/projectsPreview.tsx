@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProjectCard } from "./project-card";
+import { ProjectCard } from "./projectCard";
 
 export function ProjectsPreview() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
