@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 
 export function Hero() {
@@ -20,7 +18,7 @@ export function Hero() {
         transition={{ duration: 0.6 }}
         className="text-5xl font-bold tracking-tight"
       >
-        Building modern, scalable web applications
+        Building scalable, high-performance web applications
       </motion.h1>
 
       <motion.p
@@ -29,8 +27,9 @@ export function Hero() {
         transition={{ duration: 0.8 }}
         className="text-muted-foreground max-w-xl"
       >
-        I specialize in React, Next.js and frontend architecture with a focus on
-        performance, UX and clean code.
+        With over 5 years of experience, I specialize in React and Next.js
+        development. My expertise lies in building scalable web applications
+        with a focus on performance, architecture, and user experience.
       </motion.p>
     </div>
   );
