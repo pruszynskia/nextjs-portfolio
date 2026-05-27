@@ -1,11 +1,11 @@
 "use client";
 import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
 import { Hero } from "./Hero";
 import { AboutPreview } from "./AboutPreview";
 import { ProjectsPreview } from "./ProjectsPreview";
 import { ContactCTA } from "./ContactCta";
 import { Navbar } from "./Navbar";
+import { Section } from "@/components/layout/Section";
 
 export function HomePage() {
   return (
