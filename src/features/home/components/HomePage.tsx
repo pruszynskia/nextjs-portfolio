@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@/components/layout/Container";
+import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/Section";
 import { Hero } from "./Hero";
 import { AboutPreview } from "./AboutPreview";
