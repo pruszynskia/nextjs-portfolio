@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { PageTransition } from "@/components/providers/page-transition";
+import { PageTransition } from "@/components/providers/PageTransition";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
