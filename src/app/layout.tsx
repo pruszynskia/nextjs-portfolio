@@ -1,9 +1,11 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { PageTransition } from "@/components/providers/PageTransition";
-import { ThemeProvider } from "next-themes";
+
+import { Providers } from "@/components/providers/Providers";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -41,14 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Next.js App Router</title>
       <body className="bg-background text-foreground min-h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

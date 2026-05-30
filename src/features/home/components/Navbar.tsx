@@ -45,7 +45,7 @@ export function Navbar() {
         </li>
       </ul>
       <button className="ml-auto" onClick={toggleTheme}>
-        {isDarkMode ? <LucideMoon /> : <LucideSun />}
+        {isDarkMode ? <LucideMoon fill="black" /> : <LucideSun />}
       </button>
     </motion.nav>
   );
