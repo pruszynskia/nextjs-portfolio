@@ -9,7 +9,7 @@ export function Hero() {
         transition={{ duration: 0.4 }}
         className="text-muted-foreground text-sm"
       >
-        Senior Frontend Developer
+        Andrzej Pruszyński
       </motion.p>
 
       <motion.h1
@@ -18,7 +18,7 @@ export function Hero() {
         transition={{ duration: 0.6 }}
         className="text-5xl font-bold tracking-tight"
       >
-        Building scalable, high-performance web applications
+        Senior Frontend Developer
       </motion.h1>
 
       <motion.p
@@ -27,9 +27,10 @@ export function Hero() {
         transition={{ duration: 0.8 }}
         className="text-muted-foreground max-w-xl"
       >
-        With over 5 years of experience, I specialize in React and Next.js
-        development. My expertise lies in building scalable web applications
-        with a focus on performance, architecture, and user experience.
+        Senior Frontend Developer with over 5 years of experience building
+        scalable, high-performance web applications in enterprise environments.
+        Specialized in React and Next.js with a focus on performance,
+        architecture, and user experience.
       </motion.p>
     </div>
   );

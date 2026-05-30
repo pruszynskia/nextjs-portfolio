@@ -2,10 +2,12 @@
 import { Container } from "@/components/layout/Container";
 import { Hero } from "./Hero";
 import { AboutPreview } from "./AboutPreview";
-import { ProjectsPreview } from "./ProjectsPreview";
-import { ContactCTA } from "./ContactCta";
 import { Navbar } from "./Navbar";
 import { Section } from "@/components/layout/Section";
+import { Projects } from "./Projects";
+import { Education } from "./Education";
+import { Skills } from "./Skils";
+import { Contact } from "./Contact";
 
 export default function HomePage() {
   return (
@@ -22,16 +24,24 @@ export default function HomePage() {
           <AboutPreview />
         </Container>
       </Section>
-
       <Section>
         <Container>
-          <ProjectsPreview />
+          <Projects />
         </Container>
       </Section>
-
       <Section>
         <Container>
-          <ContactCTA />
+          <Education />
+        </Container>
+      </Section>
+      <Section>
+        <Container>
+          <Skills />
+        </Container>
+      </Section>
+      <Section>
+        <Container>
+          <Contact />
         </Container>
       </Section>
     </div>
