@@ -127,4 +127,45 @@ html {
     background-color: var(--background);
     color: var(--foreground);
   }
+
+  /* Responsive styles */
+  @media (max-width: 640px) {
+    body {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 768px) {
+    body {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    body {
+      font-size: 17px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  /* Dark mode specific styles */
+  .dark body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  .dark * {
+    @apply border-border outline-ring/50;
+  }
 }

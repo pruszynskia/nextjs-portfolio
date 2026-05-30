@@ -6,8 +6,8 @@ import { Navbar } from "./Navbar";
 import { Section } from "@/components/layout/Section";
 import { Projects } from "./Projects";
 import { Education } from "./Education";
-import { Skills } from "./Skils";
 import { Contact } from "./Contact";
+import { Skills } from "./Skills";
 
 export default function HomePage() {
   return (
