@@ -3,6 +3,7 @@ import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { PageTransition } from "@/components/providers/PageTransition";
+import { ThemeProvider } from "next-themes";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -32,9 +33,22 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html
+      lang="en"
+      className={cn("font-sans", geist.variable)}
+      suppressHydrationWarning
+    >
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Next.js App Router</title>
       <body className="bg-background text-foreground min-h-screen">
-        <PageTransition>{children}</PageTransition>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

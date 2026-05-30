@@ -7,7 +7,7 @@ import { ContactCTA } from "./ContactCta";
 import { Navbar } from "./Navbar";
 import { Section } from "@/components/layout/Section";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <div>
       <Navbar />
