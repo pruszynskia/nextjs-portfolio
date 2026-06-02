@@ -1,184 +1,106 @@
 "use client";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export function AboutPreview() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-  const sections = [
-    {
-      title: "Who I Am",
-      content: (
-        <div>
-          <p>
-            Senior Frontend Developer with over 5 years of experience building
-            scalable, high-performance web applications in enterprise
-            environments. Specialized in React and Next.js with a focus on
-            performance, architecture, and user experience.
-          </p>
-        </div>
-      ),
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
     },
-    {
-      title: "Experience",
-      content: (
-        <ul className="list-disc pl-5">
-          <li>
-            <strong>
-              TD Synnex – Senior Frontend Developer (03/2023 – 09/2025)
-            </strong>
-            <ul className="list-disc pl-5">
-              <li>
-                Led development of critical frontend features for a large-scale
-                e-commerce platform, enabling faster delivery of business
-                initiatives and improving platform scalability.
-              </li>
-              <li>
-                Improved application performance and reduced page load times by
-                ~30%, addressing slow user experience issues that impacted
-                engagement and conversion.
-              </li>
-              <li>
-                Supported enterprise platform operating across multiple APAC
-                markets, helping standardize frontend solutions for
-                international business requirements.
-              </li>
-              <li>
-                Designed and implemented multilingual AEM solutions, solving
-                content management inefficiencies and enabling faster regional
-                content operations.
-              </li>
-              <li>
-                Defined frontend architecture and state management strategy for
-                a multi-region application, reducing technical debt and
-                improving long-term maintainability.
-              </li>
-              <li>
-                Refactored legacy frontend modules to resolve scalability and
-                reliability issues that slowed down feature development.
-              </li>
-              <li>
-                Owned and stabilized critical order flow functionality, helping
-                secure a major business contract renewal by improving
-                reliability of core purchasing processes.
-              </li>
-              <li>
-                Resolved complex AEM rendering and data-loading bottlenecks,
-                significantly improving frontend responsiveness and reducing
-                operational friction for users.
-              </li>
-              <li>
-                Mentored developers and conducted code reviews, improving code
-                quality consistency and reducing onboarding time for new team
-                members.
-              </li>
-              <li>
-                Collaborated with cross-functional Agile teams as a frontend
-                coordination expert, improving communication efficiency between
-                business, backend, and frontend teams.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>
-              Xentropy.ai – Frontend Developer (05/2024 – 11/2024)
-            </strong>
-            <ul className="list-disc pl-5">
-              <li>
-                Delivered MVP of an AI-powered legal assistant platform from
-                scratch within 2 months, helping the startup validate
-                product-market fit under tight deadlines.
-              </li>
-              <li>
-                Improved onboarding flow with chatbot-driven UX, reducing
-                initial user friction and increasing usability for non-technical
-                users.
-              </li>
-              <li>
-                Optimized UI responsiveness and frontend performance, addressing
-                early scalability and usability issues common in fast-growing
-                startup products.
-              </li>
-              <li>
-                Improved AI prompt quality and output accuracy, helping increase
-                usefulness and trustworthiness of generated legal responses.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Stellarity – Frontend Developer (02/2022 – 01/2023)</strong>
-            <ul className="list-disc pl-5">
-              <li>
-                Developed e-commerce platform with advanced 3D customization
-                features.
-              </li>
-              <li>
-                Optimized GraphQL data-fetching strategy, reducing redundant API
-                calls and improving application responsiveness under growing
-                data loads.
-              </li>
-              <li>
-                Delivered scalable admin panel solutions, helping internal teams
-                manage products.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>
-              Self-Employed – Frontend Developer (08/2020 – 02/2022)
-            </strong>
-            <ul className="list-disc pl-5">
-              <li>
-                Developed SPA job board platform, solving performance and
-                usability challenges.
-              </li>
-              <li>
-                Built multiple frontend applications focused on architecture and
-                performance.
-              </li>
-            </ul>
-          </li>
-        </ul>
-      ),
-    },
-    {
-      title: "Technologies",
-      content: (
-        <ul className="list-disc pl-5">
-          <li>React</li>
-          <li>Next.js</li>
-          <li>TypeScript</li>
-          <li>JavaScript (ES6+)</li>
-          <li>Redux, Zustand, React Query</li>
-          <li>HTML5, CSS3</li>
-          <li>REST API, GraphQL</li>
-          <li>AEM (Adobe Experience Manager)</li>
-          <li>Git, npm, Yarn, Vercel, Postman</li>
-          <li>Azure</li>
-          <li>Cypress, Jest</li>
-        </ul>
-      ),
-    },
-    {
-      title: "Career History",
-      content: (
-        <ul className="list-disc pl-5">
-          <li>TD Synnex – Senior Frontend Developer (03/2023 – 09/2025)</li>
-          <li>Xentropy.ai – Frontend Developer (05/2024 – 11/2024)</li>
-          <li>Stellarity – Frontend Developer (02/2022 – 01/2023)</li>
-          <li>Self-Employed – Frontend Developer (08/2020 – 02/2022)</li>
-        </ul>
-      ),
-    },
-  ];
+  };
 
   return (
-    <div className="grid gap-4">
-      {sections.map((section, index) => (
-        <div key={index} className="rounded-lg border p-6">
-          <h2 className="text-xl font-semibold">{section.title}</h2>
-          {section.content}
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="space-y-12"
+    >
+      {/* Header */}
+      <motion.div variants={itemVariants} className="space-y-4">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm">
+          <Sparkles size={16} className="text-emerald-600" />
+          <span className="text-foreground/60 text-sm">About Me</span>
         </div>
-      ))}
-    </div>
+        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
+          Crafting Digital Experiences
+        </h2>
+      </motion.div>
+
+      {/* Main Content */}
+      <motion.div variants={itemVariants} className="grid gap-8 lg:grid-cols-2">
+        {/* Left Column - Bio */}
+        <div className="space-y-6">
+          <p className="text-foreground/80 text-lg leading-relaxed">
+            I{`&apos;`}m a passionate Senior Frontend Developer with over 5
+            years of experience building scalable, high-performance web
+            applications. My journey in tech has been driven by a love for
+            solving complex problems and creating intuitive user experiences.
+          </p>
+
+          <p className="text-foreground/80 text-lg leading-relaxed">
+            At TD Synnex, I led frontend initiatives for enterprise e-commerce
+            platforms, improving performance by 30% and architecting solutions
+            for multi-region deployments. I thrive in collaborative environments
+            where I can mentor teams and drive technical excellence.
+          </p>
+
+          <p className="text-foreground/80 text-lg leading-relaxed">
+            When I{`&apos;`}m not coding, I{`&apos;`}m exploring new
+            technologies, contributing to open-source projects, or sharing
+            knowledge with the developer community.
+          </p>
+
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05, x: 4 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-lg font-semibold text-transparent transition-opacity hover:opacity-80"
+          >
+            Get to know me better
+            <ArrowRight size={20} />
+          </motion.a>
+        </div>
+
+        {/* Right Column - Stats */}
+        <div className="space-y-4">
+          {[
+            { label: "Years Experience", value: "5+" },
+            { label: "Projects Completed", value: "50+" },
+            { label: "Happy Clients", value: "30+" },
+            { label: "Technologies Mastered", value: "20+" },
+          ].map((stat, idx) => (
+            <motion.div
+              key={idx}
+              variants={itemVariants}
+              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+            >
+              <div className="absolute -top-1/2 -right-1/2 h-full w-full bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="relative">
+                <p className="text-foreground/60 text-sm">{stat.label}</p>
+                <p className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">
+                  {stat.value}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
