@@ -43,7 +43,7 @@ export function Hero() {
       {/* Main Heading */}
       <motion.div variants={itemVariants} className="space-y-4">
         <motion.p className="text-foreground/60 text-lg font-medium">
-          Hey, I{`&apos;`}m
+          Hey, I&apos;m
         </motion.p>
         <h1 className="text-6xl font-bold tracking-tight md:text-7xl">
           <motion.span
@@ -73,8 +73,7 @@ export function Hero() {
       >
         I craft beautiful, high-performance web experiences. With 5+ years
         building scalable applications, I specialize in React, Next.js, and
-        modern architecture. Let{`&apos;`}s build something extraordinary
-        together.
+        modern architecture. Let&apos;s build something extraordinary together.
       </motion.p>
 
       {/* CTA Buttons */}

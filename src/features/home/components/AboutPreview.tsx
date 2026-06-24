@@ -46,10 +46,10 @@ export function AboutPreview() {
         {/* Left Column - Bio */}
         <div className="space-y-6">
           <p className="text-foreground/80 text-lg leading-relaxed">
-            I{`&apos;`}m a passionate Senior Frontend Developer with over 5
-            years of experience building scalable, high-performance web
-            applications. My journey in tech has been driven by a love for
-            solving complex problems and creating intuitive user experiences.
+            I&apos;m a passionate Senior Frontend Developer with over 5 years of
+            experience building scalable, high-performance web applications. My
+            journey in tech has been driven by a love for solving complex
+            problems and creating intuitive user experiences.
           </p>
 
           <p className="text-foreground/80 text-lg leading-relaxed">
@@ -60,9 +60,9 @@ export function AboutPreview() {
           </p>
 
           <p className="text-foreground/80 text-lg leading-relaxed">
-            When I{`&apos;`}m not coding, I{`&apos;`}m exploring new
-            technologies, contributing to open-source projects, or sharing
-            knowledge with the developer community.
+            When I&apos;m not coding, I&apos;m exploring new technologies,
+            contributing to open-source projects, or sharing knowledge with the
+            developer community.
           </p>
 
           <motion.a
@@ -80,8 +80,8 @@ export function AboutPreview() {
         <div className="space-y-4">
           {[
             { label: "Years Experience", value: "5+" },
-            { label: "Projects Completed", value: "50+" },
-            { label: "Happy Clients", value: "30+" },
+            { label: "Projects Completed", value: "20+" },
+            { label: "Happy Clients", value: "7+" },
             { label: "Technologies Mastered", value: "20+" },
           ].map((stat, idx) => (
             <motion.div
