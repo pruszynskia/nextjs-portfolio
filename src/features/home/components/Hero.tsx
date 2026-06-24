@@ -32,7 +32,7 @@ export function Hero() {
       {/* Badge */}
       <motion.div
         variants={itemVariants}
-        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm"
+        className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
       >
         <div className="h-2 w-2 rounded-full bg-green-500" />
         <span className="text-foreground/60 text-sm">
@@ -92,7 +92,7 @@ export function Hero() {
           href="#contact"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="text-foreground rounded-lg border border-white/20 px-8 py-3 font-semibold transition-all hover:border-white/40 hover:bg-white/5"
+          className="text-foreground rounded-lg border border-slate-200 px-8 py-3 font-semibold transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/20 dark:hover:border-white/40 dark:hover:bg-white/5"
         >
           Get in Touch
         </motion.a>
@@ -106,7 +106,7 @@ export function Hero() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-white/10 dark:hover:bg-white/5"
+          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/5"
         >
           <FaGithub size={24} />
         </motion.a>
@@ -117,7 +117,7 @@ export function Hero() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-white/10 dark:hover:bg-white/5"
+          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/5"
         >
           <FaLinkedin size={24} />
         </motion.a>
@@ -126,7 +126,7 @@ export function Hero() {
           href="mailto:your.email@example.com"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-white/10 dark:hover:bg-white/5"
+          className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/5"
         >
           <Mail size={24} />
         </motion.a>

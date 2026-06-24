@@ -32,7 +32,7 @@ export function AboutPreview() {
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <Sparkles size={16} className="text-emerald-600" />
           <span className="text-foreground/60 text-sm">About Me</span>
         </div>
@@ -87,7 +87,7 @@ export function AboutPreview() {
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+              className="group relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50 p-6 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
             >
               <div className="relative">
                 <p className="text-foreground/60 text-sm">{stat.label}</p>
