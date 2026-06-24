@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { useState } from "react";
 
@@ -22,8 +22,17 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
-    console.log("Form submitted:", formData);
+
+    const { name, email, message } = formData;
+    const subject = encodeURIComponent(
+      `Portfolio Contact from ${name || email}`,
+    );
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    );
+    const mailtoLink = `mailto:andrzej.pruszynski90@gmail.com?subject=${subject}&body=${body}`;
+
+    window.location.href = mailtoLink;
     setSubmitted(true);
     setTimeout(() => {
       setFormData({ name: "", email: "", message: "" });
@@ -35,20 +44,14 @@ export function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: "andrzej@example.com",
-      href: "mailto:andrzej@example.com",
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "andrzej.pruszynski90@gmail.com",
+      href: "mailto:andrzej.pruszynski90@gmail.com",
     },
     {
       icon: MessageSquare,
       label: "LinkedIn",
-      value: "linkedin.com/in/andrzej",
-      href: "https://linkedin.com/in/andrzej",
+      value: "linkedin.com/in/andrzej-pruszynski",
+      href: "https://www.linkedin.com/in/andrzej-pruszynski",
     },
   ];
 

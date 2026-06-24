@@ -6,11 +6,11 @@ export function Education() {
   const educationData = [
     {
       type: "degree",
-      title: "Bachelor of Science in Computer Science",
-      institution: "University of Technology Sydney",
+      title: "Master of Science in Civil Engineering Architecture",
+      institution: "University of Technology Wroclaw, Poland",
       year: "2009 - 2017",
       description:
-        "Graduated with honors in Computer Science, focusing on software development and web applications.",
+        "Graduated with honors in Civil Engineering Architecture, focusing on Architecture and Urbanistics.",
       icon: GraduationCap,
     },
   ];
@@ -46,16 +46,15 @@ export function Education() {
       <motion.div variants={itemVariants} className="space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm">
           <Sparkles size={16} className="text-indigo-600" />
-          <span className="text-foreground/60 text-sm">
-            Education & Certifications
-          </span>
+          <span className="text-foreground/60 text-sm">Education</span>
         </div>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
           Continuous Learning
         </h2>
         <p className="text-foreground/60 text-lg">
-          Building expertise through formal education and professional
-          certifications.
+          Self-taught Frontend Developer with strong project ownership,
+          detail-driven execution, and a civil engineering architecture
+          background that brings disciplined design thinking to modern UI work.
         </p>
       </motion.div>
 
