@@ -99,7 +99,7 @@ export function Contact() {
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <Sparkles size={16} className="text-pink-600" />
           <span className="text-foreground/60 text-sm">Get In Touch</span>
         </div>
@@ -127,7 +127,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 4 }}
-                  className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/20 hover:bg-white/10"
+                  className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
                 >
                   <div className="flex-shrink-0 rounded-full bg-gradient-to-br from-pink-600/20 to-rose-600/20 p-3">
                     <Icon size={24} className="text-white" />
@@ -164,7 +164,7 @@ export function Contact() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-white/10 ${social.color}`}
+                    className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color}`}
                     aria-label={social.label}
                   >
                     <Icon size={24} />
@@ -179,7 +179,7 @@ export function Contact() {
         <motion.div variants={itemVariants}>
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm"
+            className="space-y-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
           >
             <h3 className="text-foreground text-2xl font-bold">
               Send Me a Message
@@ -196,7 +196,7 @@ export function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 transition-all focus:border-white/30 focus:bg-white/10 focus:ring-0 focus:outline-none"
+                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="John Doe"
               />
             </div>
@@ -212,7 +212,7 @@ export function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 transition-all focus:border-white/30 focus:bg-white/10 focus:ring-0 focus:outline-none"
+                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="john@example.com"
               />
             </div>
@@ -228,7 +228,7 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 transition-all focus:border-white/30 focus:bg-white/10 focus:ring-0 focus:outline-none"
+                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="Tell me about your project..."
               />
             </div>
