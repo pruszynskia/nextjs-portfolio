@@ -101,7 +101,7 @@ export function Hero() {
       {/* Social Links */}
       <motion.div variants={itemVariants} className="flex gap-6 pt-8">
         <motion.a
-          href="https://github.com"
+          href="https://github.com/pruszynskia"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1, y: -2 }}
@@ -112,7 +112,7 @@ export function Hero() {
         </motion.a>
 
         <motion.a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/andrzej-pruszynski/"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1, y: -2 }}
@@ -123,7 +123,7 @@ export function Hero() {
         </motion.a>
 
         <motion.a
-          href="mailto:your.email@example.com"
+          href="mailto:andrzej.pruszynski90@gmail.com"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
           className="text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/5"
