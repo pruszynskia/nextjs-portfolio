@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { GraduationCap, Award, Sparkles } from "lucide-react";
+import { GraduationCap, Sparkles } from "lucide-react";
 
 export function Education() {
   const educationData = [
@@ -8,19 +8,10 @@ export function Education() {
       type: "degree",
       title: "Bachelor of Science in Computer Science",
       institution: "University of Technology Sydney",
-      year: "2018 - 2022",
+      year: "2009 - 2017",
       description:
         "Graduated with honors in Computer Science, focusing on software development and web applications.",
       icon: GraduationCap,
-    },
-    {
-      type: "certification",
-      title: "Certified React Developer",
-      institution: "Coursera",
-      year: "2021",
-      description:
-        "Completed a specialized course in React development, enhancing skills in building interactive web applications.",
-      icon: Award,
     },
   ];
 

@@ -107,10 +107,10 @@ export function Contact() {
           <span className="text-foreground/60 text-sm">Get In Touch</span>
         </div>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          Let{`&apos;`}s Work Together
+          Let&apos;s Work Together
         </h2>
         <p className="text-foreground/60 mx-auto max-w-2xl text-lg">
-          Have a project in mind or want to chat? I{`&apos;`}d love to hear from
+          Have a project in mind or want to chat? I&apos;d love to hear from
           you. Reach out through any of these channels.
         </p>
       </motion.div>
