@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Sun, Moon, Menu, X, Download } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Navbar() {
@@ -71,7 +71,18 @@ export function Navbar() {
       </div>
 
       {/* Right Actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        <motion.a
+          href="/Andrzej_Pruszynski_CV.pdf"
+          download
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="text-foreground/80 hover:text-foreground inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium transition-colors hover:border-white/20 hover:bg-white/10"
+        >
+          <Download size={18} />
+          Download CV
+        </motion.a>
+
         <motion.button
           onClick={toggleTheme}
           whileHover={{ scale: 1.1 }}
