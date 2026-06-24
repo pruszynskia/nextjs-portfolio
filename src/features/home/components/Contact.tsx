@@ -59,13 +59,13 @@ export function Contact() {
     {
       icon: FaGithub,
       label: "GitHub",
-      href: "https://github.com",
+      href: "https://github.com/pruszynskia",
       color: "hover:text-gray-700 dark:hover:text-gray-300",
     },
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/andrzej-pruszynski",
       color: "hover:text-blue-600",
     },
   ];
