@@ -78,10 +78,7 @@ export function Education() {
               {/* Icon */}
               <div className="flex-shrink-0">
                 <div className="inline-flex rounded-full bg-gradient-to-br from-indigo-600/20 to-purple-600/20 p-4">
-                  <Icon
-                    size={28}
-                    className="bg-gradient-to-br from-indigo-600 to-purple-600 bg-clip-text text-transparent"
-                  />
+                  <Icon size={28} className="text-white" />
                 </div>
               </div>
 

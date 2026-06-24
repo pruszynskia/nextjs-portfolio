@@ -115,18 +115,10 @@ export function Skills() {
               whileHover={{ y: -4, scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
             >
-              {/* Background Gradient */}
-              <div
-                className={`absolute -top-1/2 -right-1/2 h-full w-full bg-gradient-to-br ${skill.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}
-              />
-
               <div className="relative space-y-4">
                 {/* Icon */}
                 <div className={`inline-flex rounded-xl ${skill.accent} p-3`}>
-                  <Icon
-                    size={28}
-                    className={`bg-gradient-to-br ${skill.gradient} bg-clip-text text-transparent`}
-                  />
+                  <Icon size={28} className="text-white" />
                 </div>
 
                 {/* Content */}

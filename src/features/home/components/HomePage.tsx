@@ -13,33 +13,33 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
-      <Section>
+      <Section id="home">
         <Container>
           <Hero />
         </Container>
       </Section>
 
-      <Section>
+      <Section id="about">
         <Container>
           <AboutPreview />
         </Container>
       </Section>
-      <Section>
+      <Section id="projects">
         <Container>
           <Projects />
         </Container>
       </Section>
-      <Section>
+      <Section id="education">
         <Container>
           <Education />
         </Container>
       </Section>
-      <Section>
+      <Section id="skills">
         <Container>
           <Skills />
         </Container>
       </Section>
-      <Section>
+      <Section id="contact">
         <Container>
           <Contact />
         </Container>
