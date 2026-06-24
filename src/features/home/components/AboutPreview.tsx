@@ -89,8 +89,6 @@ export function AboutPreview() {
               variants={itemVariants}
               className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
             >
-              <div className="absolute -top-1/2 -right-1/2 h-full w-full bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
               <div className="relative">
                 <p className="text-foreground/60 text-sm">{stat.label}</p>
                 <p className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">

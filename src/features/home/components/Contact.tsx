@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Mail, Phone, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { useState } from "react";
 
 export function Contact() {
@@ -65,12 +65,6 @@ export function Contact() {
       href: "https://linkedin.com",
       color: "hover:text-blue-600",
     },
-    {
-      icon: FaXTwitter,
-      label: "X",
-      href: "https://x.com",
-      color: "hover:text-gray-700 dark:hover:text-gray-300",
-    },
   ];
 
   const containerVariants = {
@@ -133,10 +127,7 @@ export function Contact() {
                   className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/20 hover:bg-white/10"
                 >
                   <div className="flex-shrink-0 rounded-full bg-gradient-to-br from-pink-600/20 to-rose-600/20 p-3">
-                    <Icon
-                      size={24}
-                      className="bg-gradient-to-br from-pink-600 to-rose-600 bg-clip-text text-transparent"
-                    />
+                    <Icon size={24} className="text-white" />
                   </div>
                   <div className="space-y-1">
                     <p className="text-foreground/60 text-sm font-medium">
@@ -154,7 +145,7 @@ export function Contact() {
               );
             })}
           </div>
-          ;{/* Social Links */}
+          {/* Social Links */}
           <div className="pt-6">
             <h3 className="text-foreground mb-4 text-lg font-semibold">
               Connect On Social
@@ -179,7 +170,6 @@ export function Contact() {
               })}
             </div>
           </div>
-          ; ; ;;
         </motion.div>
 
         {/* Contact Form */}
