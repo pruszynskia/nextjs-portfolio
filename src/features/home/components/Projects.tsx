@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { ProjectsContent, Project } from "../types";
 
 export function Projects({ content }: { content?: ProjectsContent }) {
@@ -35,19 +36,21 @@ export function Projects({ content }: { content?: ProjectsContent }) {
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
-          <Sparkles size={16} className="text-purple-600" />
-          <span className="text-foreground/60 text-sm">
-            {content?.header?.badge ?? "Featured Projects"}
-          </span>
-        </div>
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          {content?.header?.title ?? "Work I'm proud of"}
-        </h2>
-        <p className="text-foreground/60 text-lg">
-          {content?.header?.description ??
-            "A selection of projects that showcase my expertise and passion for building beautiful, functional solutions."}
-        </p>
+        <SectionHeader
+          badge={
+            <>
+              <Sparkles size={16} className="text-purple-600" />
+              <span className="text-foreground/60 text-sm">
+                {content?.header?.badge ?? "Featured Projects"}
+              </span>
+            </>
+          }
+          title={content?.header?.title ?? "Work I'm proud of"}
+          description={
+            content?.header?.description ??
+            "A selection of projects that showcase my expertise and passion for building beautiful, functional solutions."
+          }
+        />
       </motion.div>
 
       {/* Projects Grid */}
