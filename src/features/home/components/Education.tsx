@@ -2,40 +2,22 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { staggerContainer, fadeInUp, cardReveal } from "@/lib/animations";
 import type { EducationContent, EducationItem, IconMap } from "../types";
 
 export function Education({ content }: { content?: EducationContent }) {
   const educationData: EducationItem[] = content?.items ?? [];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
     <motion.div
-      variants={containerVariants}
+      variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-100px" }}
       className="space-y-12"
     >
       {/* Header */}
-      <motion.div variants={itemVariants} className="space-y-4">
+      <motion.div variants={fadeInUp} className="space-y-4">
         <SectionHeader
           badge={
             <>
@@ -61,8 +43,8 @@ export function Education({ content }: { content?: EducationContent }) {
           return (
             <motion.div
               key={index}
-              variants={itemVariants}
-              whileHover={{ x: 4 }}
+              variants={cardReveal}
+              whileHover={{ x: 8 }}
               className="group relative flex gap-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
             >
               {/* Timeline line */}

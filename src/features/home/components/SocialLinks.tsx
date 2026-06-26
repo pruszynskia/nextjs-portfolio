@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import type { SocialLink, IconMap } from "../types";
+import type { SocialLink } from "../types";
 
 export function SocialLinks({
   variants,
@@ -10,8 +10,6 @@ export function SocialLinks({
   variants?: Variants;
   links: SocialLink[];
 }) {
-  const iconMap: IconMap = { FaGithub, FaLinkedin, Mail };
-
   return (
     <motion.div variants={variants} className="flex gap-6 pt-8">
       {links.map((link: SocialLink, idx: number) => {

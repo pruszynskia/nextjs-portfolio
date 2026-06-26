@@ -3,6 +3,7 @@ import { StatusBadge } from "./StatusBadge";
 import { HeroHeadline } from "./HeroHeadline";
 import { CTAGroup } from "./CTAGroup";
 import { SocialLinks } from "./SocialLinks";
+import { ParticlesBackground } from "../../../components/animations/AmbientBackground";
 
 import type { HeroContent } from "../types";
 
@@ -33,6 +34,7 @@ export function Hero({ content }: { content?: HeroContent }) {
       animate="visible"
       className="flex flex-col items-start justify-center gap-8 py-32"
     >
+      <ParticlesBackground />
       <StatusBadge variants={itemVariants} text={content?.badgeText ?? ""} />
 
       <HeroHeadline

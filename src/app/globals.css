@@ -197,8 +197,17 @@ html {
 }
 
 @layer utilities {
+  /* Floating and motion animations */
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float 2s ease-in-out infinite;
   }
 
   .animate-glow {
@@ -209,16 +218,105 @@ html {
     animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  /* Gradient animations */
   .gradient-animation {
     background-size: 200% 200%;
     animation: gradient-shift 3s ease infinite;
   }
 
+  /* Glass effect and transparencies */
   .backdrop-blur-glass {
     @apply backdrop-blur-md bg-white/10 dark:bg-white/5;
   }
 
+  .glass-effect {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl dark:border-white/20 dark:bg-white/10;
+  }
+
+  .glass-effect-strong {
+    @apply rounded-2xl border border-white/20 bg-white/20 backdrop-blur-xl dark:border-white/30 dark:bg-white/15;
+  }
+
+  /* Text effects */
   .text-gradient {
     @apply bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .transition-smooth-fast {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .transition-smooth-slow {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .transition-transform-smooth {
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  /* Focus states with smooth animation */
+  .focus-ring-smooth {
+    @apply outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+  }
+
+  .focus-ring-inset {
+    @apply outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary;
+  }
+
+  /* Hover scale utilities with smooth animation */
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-scale-sm {
+    @apply transition-transform duration-300 hover:scale-102;
+  }
+
+  .hover-brightness {
+    @apply transition-all duration-300 hover:brightness-110;
+  }
+
+  /* Utilities for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Performance optimizations */
+  .will-animate {
+    @apply will-change-transform;
+  }
+
+  .will-animate-opacity {
+    will-change: opacity;
+  }
+
+  /* Subtle backdrop and overlay effects */
+  .overlay-subtle {
+    @apply fixed inset-0 bg-black/30 backdrop-blur-sm;
+  }
+
+  .overlay-heavy {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-lg;
+  }
+
+  /* Text selection styling */
+  .selection-smooth {
+    @apply selection:bg-primary/30 selection:text-foreground;
   }
 }

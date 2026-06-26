@@ -11,40 +11,22 @@ import {
 } from "lucide-react";
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { staggerContainer, fadeInUp, cardReveal } from "@/lib/animations";
 import type { SkillsContent, SkillCategory, IconMap } from "../types";
 
 export function Skills({ content }: { content?: SkillsContent }) {
   const skillCategories: SkillCategory[] = content?.categories ?? [];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
     <motion.div
-      variants={containerVariants}
+      variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-100px" }}
       className="space-y-12"
     >
       {/* Header */}
-      <motion.div variants={itemVariants} className="space-y-4">
+      <motion.div variants={fadeInUp} className="space-y-4">
         <SectionHeader
           badge={
             <>
@@ -77,8 +59,8 @@ export function Skills({ content }: { content?: SkillsContent }) {
           return (
             <motion.div
               key={idx}
-              variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.02 }}
+              variants={cardReveal}
+              whileHover={{ y: -8, scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-6 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
             >
               <div className="relative space-y-4">
