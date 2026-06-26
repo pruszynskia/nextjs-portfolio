@@ -1,19 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { GraduationCap, Sparkles } from "lucide-react";
+import type { EducationContent, EducationItem, IconMap } from "../types";
 
-export function Education() {
-  const educationData = [
-    {
-      type: "degree",
-      title: "Master of Science in Civil Engineering Architecture",
-      institution: "University of Technology Wroclaw, Poland",
-      year: "2009 - 2017",
-      description:
-        "Graduated with honors in Civil Engineering Architecture, focusing on Architecture and Urbanistics.",
-      icon: GraduationCap,
-    },
-  ];
+export function Education({ content }: { content?: EducationContent }) {
+  const educationData: EducationItem[] = content?.items ?? [];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -46,22 +37,24 @@ export function Education() {
       <motion.div variants={itemVariants} className="space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <Sparkles size={16} className="text-indigo-600" />
-          <span className="text-foreground/60 text-sm">Education</span>
+          <span className="text-foreground/60 text-sm">
+            {content?.header?.badge ?? "Education"}
+          </span>
         </div>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          Continuous Learning
+          {content?.header?.title ?? "Continuous Learning"}
         </h2>
         <p className="text-foreground/60 text-lg">
-          Self-taught Frontend Developer with strong project ownership,
-          detail-driven execution, and a civil engineering architecture
-          background that brings disciplined design thinking to modern UI work.
+          {content?.header?.description ??
+            "Self-taught Frontend Developer with strong project ownership, detail-driven execution, and a civil engineering architecture background that brings disciplined design thinking to modern UI work."}
         </p>
       </motion.div>
 
       {/* Timeline */}
       <motion.div className="space-y-6">
-        {educationData.map((edu, index) => {
-          const Icon = edu.icon;
+        {educationData.map((edu: EducationItem, index: number) => {
+          const iconMap: IconMap = { GraduationCap };
+          const Icon = iconMap[edu.icon] ?? GraduationCap;
           return (
             <motion.div
               key={index}

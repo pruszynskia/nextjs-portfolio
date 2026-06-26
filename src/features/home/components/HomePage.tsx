@@ -8,6 +8,11 @@ import { Projects } from "./Projects";
 import { Education } from "./Education";
 import { Contact } from "./Contact";
 import { Skills } from "./Skills";
+import { heroContent } from "../content/hero";
+import { projectsContent } from "../content/projects";
+import { skillsContent } from "../content/skills";
+import { educationContent } from "../content/education";
+import { contactContent } from "../content/contact";
 
 export default function HomePage() {
   return (
@@ -15,7 +20,7 @@ export default function HomePage() {
       <Navbar />
       <Section id="home">
         <Container>
-          <Hero />
+          <Hero content={heroContent} />
         </Container>
       </Section>
 
@@ -26,22 +31,22 @@ export default function HomePage() {
       </Section>
       <Section id="projects">
         <Container>
-          <Projects />
+          <Projects content={projectsContent} />
         </Container>
       </Section>
       <Section id="education">
         <Container>
-          <Education />
+          <Education content={educationContent} />
         </Container>
       </Section>
       <Section id="skills">
         <Container>
-          <Skills />
+          <Skills content={skillsContent} />
         </Container>
       </Section>
       <Section id="contact">
         <Container>
-          <Contact />
+          <Contact content={contactContent} />
         </Container>
       </Section>
     </div>

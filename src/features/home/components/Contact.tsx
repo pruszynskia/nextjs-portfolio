@@ -3,8 +3,14 @@ import { motion } from "framer-motion";
 import { Mail, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { useState } from "react";
+import type {
+  ContactContent,
+  ContactMethod,
+  SocialLink,
+  IconMap,
+} from "../types";
 
-export function Contact() {
+export function Contact({ content }: { content?: ContactContent }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,7 +36,9 @@ export function Contact() {
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\n${message}`,
     );
-    const mailtoLink = `mailto:andrzej.pruszynski90@gmail.com?subject=${subject}&body=${body}`;
+    const toEmail =
+      contactMethods?.[0]?.value ?? "andrzej.pruszynski90@gmail.com";
+    const mailtoLink = `mailto:${toEmail}?subject=${subject}&body=${body}`;
 
     window.location.href = mailtoLink;
     setSubmitted(true);
@@ -40,35 +48,8 @@ export function Contact() {
     }, 3000);
   };
 
-  const contactMethods = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "andrzej.pruszynski90@gmail.com",
-      href: "mailto:andrzej.pruszynski90@gmail.com",
-    },
-    {
-      icon: MessageSquare,
-      label: "LinkedIn",
-      value: "linkedin.com/in/andrzej-pruszynski",
-      href: "https://www.linkedin.com/in/andrzej-pruszynski",
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: FaGithub,
-      label: "GitHub",
-      href: "https://github.com/pruszynskia",
-      color: "hover:text-gray-700 dark:hover:text-gray-300",
-    },
-    {
-      icon: FaLinkedin,
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/andrzej-pruszynski",
-      color: "hover:text-blue-600",
-    },
-  ];
+  const contactMethods: ContactMethod[] = content?.contactMethods ?? [];
+  const socialLinks: SocialLink[] = content?.socialLinks ?? [];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,14 +82,16 @@ export function Contact() {
       <motion.div variants={itemVariants} className="space-y-4 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <Sparkles size={16} className="text-pink-600" />
-          <span className="text-foreground/60 text-sm">Get In Touch</span>
+          <span className="text-foreground/60 text-sm">
+            {content?.header?.badge ?? "Get In Touch"}
+          </span>
         </div>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          Let&apos;s Work Together
+          {content?.header?.title ?? "Let's Work Together"}
         </h2>
         <p className="text-foreground/60 mx-auto max-w-2xl text-lg">
-          Have a project in mind or want to chat? I&apos;d love to hear from
-          you. Reach out through any of these channels.
+          {content?.header?.description ??
+            "Have a project in mind or want to chat? I'd love to hear from you. Reach out through any of these channels."}
         </p>
       </motion.div>
 
@@ -118,8 +101,9 @@ export function Contact() {
         <motion.div variants={itemVariants} className="space-y-6">
           <h3 className="text-foreground text-2xl font-bold">Contact Info</h3>
           <div className="space-y-4">
-            {contactMethods.map((method, idx) => {
-              const Icon = method.icon;
+            {contactMethods.map((method: ContactMethod, idx: number) => {
+              const iconMap: IconMap = { Mail, MessageSquare };
+              const Icon = iconMap[method.icon] ?? Mail;
               return (
                 <motion.a
                   key={idx}
@@ -154,8 +138,9 @@ export function Contact() {
               Connect On Social
             </h3>
             <div className="flex gap-4">
-              {socialLinks.map((social, idx) => {
-                const Icon = social.icon;
+              {socialLinks.map((social: SocialLink, idx: number) => {
+                const iconMap: IconMap = { FaGithub, FaLinkedin };
+                const Icon = iconMap[social.icon] ?? FaGithub;
                 return (
                   <motion.a
                     key={idx}
@@ -164,7 +149,7 @@ export function Contact() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color}`}
+                    className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color ?? ""}`}
                     aria-label={social.label}
                   >
                     <Icon size={24} />
