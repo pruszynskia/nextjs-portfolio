@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { GraduationCap, Sparkles } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { EducationContent, EducationItem, IconMap } from "../types";
 
 export function Education({ content }: { content?: EducationContent }) {
@@ -35,19 +36,21 @@ export function Education({ content }: { content?: EducationContent }) {
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
-          <Sparkles size={16} className="text-indigo-600" />
-          <span className="text-foreground/60 text-sm">
-            {content?.header?.badge ?? "Education"}
-          </span>
-        </div>
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          {content?.header?.title ?? "Continuous Learning"}
-        </h2>
-        <p className="text-foreground/60 text-lg">
-          {content?.header?.description ??
-            "Self-taught Frontend Developer with strong project ownership, detail-driven execution, and a civil engineering architecture background that brings disciplined design thinking to modern UI work."}
-        </p>
+        <SectionHeader
+          badge={
+            <>
+              <Sparkles size={16} className="text-indigo-600" />
+              <span className="text-foreground/60 text-sm">
+                {content?.header?.badge ?? "Education"}
+              </span>
+            </>
+          }
+          title={content?.header?.title ?? "Continuous Learning"}
+          description={
+            content?.header?.description ??
+            "Self-taught Frontend Developer with strong project ownership, detail-driven execution, and a civil engineering architecture background that brings disciplined design thinking to modern UI work."
+          }
+        />
       </motion.div>
 
       {/* Timeline */}
