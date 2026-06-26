@@ -1,60 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import type { ProjectsContent, Project } from "../types";
 
-export function Projects() {
-  const projects = [
-    {
-      title: "Legal Assistant AI",
-      subtitle: "Xentropy.ai — Frontend Developer",
-      description:
-        "Delivered an AI-powered legal assistant MVP that helped validate product-market fit and improve early user trust.",
-      highlights: [
-        "Built the MVP in under 2 months to help the startup validate product-market fit.",
-        "Improved onboarding with chatbot-driven UX to reduce friction for non-technical users.",
-        "Optimized frontend responsiveness and performance for a fast-growing startup product.",
-        "Enhanced AI prompt quality and generated response accuracy for better legal outcomes.",
-      ],
-      technologies: ["Next.js", "Python", "Supabase", "Vercel", "React"],
-      gradient: "from-blue-600/20 via-sky-600/20 to-blue-600/20",
-      accent: "from-blue-600 to-sky-500",
-    },
-    {
-      title: "E-commerce Platform",
-      subtitle: "TD Synnex / Stellarity — Senior Frontend Developer",
-      description:
-        "Led frontend development for a large-scale platform with 3D customization and international ecommerce workflows.",
-      highlights: [
-        "Delivered critical frontend features for a large-scale e-commerce platform across multiple APAC markets.",
-        "Improved page load times by ~30%, fixing slow UX issues that affected engagement.",
-        "Designed multilingual AEM solutions and defined state management for a multi-region app.",
-        "Refactored legacy modules and stabilized order flow to support major business contract renewal.",
-      ],
-      technologies: ["React", "Next.js", "AEM", "Zustand", "Azure", "GraphQL"],
-      gradient: "from-purple-600/20 via-pink-600/20 to-purple-600/20",
-      accent: "from-purple-600 to-pink-500",
-    },
-    {
-      title: "Job Board Platform",
-      subtitle: "Freelance — Frontend Developer",
-      description:
-        "Delivered a high-performance job board and multiple frontend applications focused on architecture and usability.",
-      highlights: [
-        "Built a SPA job board platform that solved performance and usability challenges.",
-        "Created multiple apps with a focus on frontend architecture and fast loading experience.",
-        "Improved application structure for long-term maintainability and better user journeys.",
-      ],
-      technologies: [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "Performance Optimization",
-        "Frontend Architecture",
-      ],
-      gradient: "from-pink-600/20 via-orange-600/20 to-pink-600/20",
-      accent: "from-pink-600 to-orange-500",
-    },
-  ];
+export function Projects({ content }: { content?: ProjectsContent }) {
+  const projects: Project[] = content?.items ?? [];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -87,20 +37,22 @@ export function Projects() {
       <motion.div variants={itemVariants} className="space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <Sparkles size={16} className="text-purple-600" />
-          <span className="text-foreground/60 text-sm">Featured Projects</span>
+          <span className="text-foreground/60 text-sm">
+            {content?.header?.badge ?? "Featured Projects"}
+          </span>
         </div>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          Work I&apos;m proud of
+          {content?.header?.title ?? "Work I'm proud of"}
         </h2>
         <p className="text-foreground/60 text-lg">
-          A selection of projects that showcase my expertise and passion for
-          building beautiful, functional solutions.
+          {content?.header?.description ??
+            "A selection of projects that showcase my expertise and passion for building beautiful, functional solutions."}
         </p>
       </motion.div>
 
       {/* Projects Grid */}
       <motion.div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-        {projects.map((project, idx) => (
+        {projects.map((project: Project, idx: number) => (
           <motion.div
             key={idx}
             variants={itemVariants}
@@ -134,24 +86,26 @@ export function Projects() {
                   What I delivered
                 </h4>
                 <ul className="text-foreground/70 space-y-2">
-                  {project.highlights.map((highlight, highlightIdx) => (
-                    <motion.li
-                      key={highlightIdx}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: highlightIdx * 0.05 }}
-                      className="flex gap-3 text-sm leading-relaxed"
-                    >
-                      <span className="bg-foreground mt-1 inline-flex h-2 w-2 shrink-0 rounded-full" />
-                      <span>{highlight}</span>
-                    </motion.li>
-                  ))}
+                  {project.highlights.map(
+                    (highlight: string, highlightIdx: number) => (
+                      <motion.li
+                        key={highlightIdx}
+                        initial={{ opacity: 0, x: -12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: highlightIdx * 0.05 }}
+                        className="flex gap-3 text-sm leading-relaxed"
+                      >
+                        <span className="bg-foreground mt-1 inline-flex h-2 w-2 shrink-0 rounded-full" />
+                        <span>{highlight}</span>
+                      </motion.li>
+                    ),
+                  )}
                 </ul>
               </div>
 
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 pt-2">
-                {project.technologies.map((tech, techIdx) => (
+                {project.technologies.map((tech: string, techIdx: number) => (
                   <motion.span
                     key={techIdx}
                     whileHover={{ scale: 1.05 }}
