@@ -2,40 +2,22 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { staggerContainer, fadeInUp, cardReveal } from "@/lib/animations";
 import type { ProjectsContent, Project } from "../types";
 
 export function Projects({ content }: { content?: ProjectsContent }) {
   const projects: Project[] = content?.items ?? [];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
     <motion.div
-      variants={containerVariants}
+      variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-100px" }}
       className="space-y-12"
     >
       {/* Header */}
-      <motion.div variants={itemVariants} className="space-y-4">
+      <motion.div variants={fadeInUp} className="space-y-4">
         <SectionHeader
           badge={
             <>
@@ -58,8 +40,11 @@ export function Projects({ content }: { content?: ProjectsContent }) {
         {projects.map((project: Project, idx: number) => (
           <motion.div
             key={idx}
-            variants={itemVariants}
-            whileHover={{ y: -4 }}
+            variants={cardReveal}
+            whileHover={{
+              y: -8,
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+            }}
             className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
           >
             <div className="relative space-y-6 p-8">
