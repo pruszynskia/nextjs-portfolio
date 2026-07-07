@@ -3,31 +3,31 @@ import type { SkillsContent } from "../types";
 export const skillsContent: SkillsContent = {
   header: {
     badge: "Skills & Expertise",
-    title: "Technologies & Tools",
+    title: "Core Frontend Expertise",
     description:
-      "A comprehensive toolkit built through years of professional experience and continuous learning.",
+      "Focused on building scalable, accessible web experiences with modern tooling, strong engineering fundamentals, and a product-minded approach.",
   },
   categories: [
     {
       title: "Frontend Development",
       description:
-        "React, Next.js, TypeScript, JavaScript, Tailwind CSS, Framer Motion",
+        "React, Next.js, TypeScript, JavaScript, SSR, component architecture",
       icon: "Code2",
       gradient: "from-blue-600 to-cyan-600",
       accent: "bg-blue-600/20",
     },
     {
-      title: "UI/UX Design",
+      title: "UI Systems",
       description:
-        "Responsive design, Accessibility, Design systems, Component libraries",
+        "Responsive UI, accessibility, design systems, reusable component libraries",
       icon: "Palette",
       gradient: "from-purple-600 to-pink-600",
       accent: "bg-purple-600/20",
     },
     {
-      title: "Backend Development",
+      title: "Integration & Architecture",
       description:
-        "REST APIs, GraphQL, Node.js, Database design, Server-side rendering",
+        "REST APIs, GraphQL, Node.js, AEM integration, scalable frontend architecture",
       icon: "Database",
       gradient: "from-orange-600 to-red-600",
       accent: "bg-orange-600/20",
@@ -35,23 +35,23 @@ export const skillsContent: SkillsContent = {
     {
       title: "Performance & Optimization",
       description:
-        "Code splitting, Lazy loading, Bundle optimization, Web vitals",
+        "Core Web Vitals, code splitting, lazy loading, runtime performance tuning",
       icon: "Zap",
       gradient: "from-yellow-600 to-orange-600",
       accent: "bg-yellow-600/20",
     },
     {
-      title: "Cloud & DevOps",
+      title: "Delivery & DevOps",
       description:
-        "Azure, Docker, CI/CD, Deployment, Cloud infrastructure management",
+        "CI/CD, Azure, Docker, deployment pipelines, environment management",
       icon: "Cloud",
       gradient: "from-cyan-600 to-blue-600",
       accent: "bg-cyan-600/20",
     },
     {
-      title: "Version Control & Tools",
+      title: "Engineering Practices",
       description:
-        "Git, GitHub, Jest, Cypress, Testing frameworks, Development tools",
+        "Git, GitHub, testing, code reviews, maintainable frontend delivery",
       icon: "GitBranch",
       gradient: "from-green-600 to-emerald-600",
       accent: "bg-green-600/20",

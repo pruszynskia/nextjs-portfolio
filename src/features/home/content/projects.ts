@@ -3,23 +3,23 @@ import type { ProjectsContent } from "../types";
 export const projectsContent: ProjectsContent = {
   header: {
     badge: "Featured Projects",
-    title: "Work I'm proud of",
+    title: "Selected Work",
     description:
-      "A selection of projects that showcase my expertise and passion for building beautiful, functional solutions.",
+      "Examples of frontend systems I’ve built and improved across startups, enterprise platforms, and high-growth products.",
   },
   items: [
     {
       title: "Legal Assistant AI",
       subtitle: "Xentropy.ai — Frontend Developer",
       description:
-        "Delivered an AI-powered legal assistant MVP that helped validate product-market fit and improve early user trust.",
+        "Delivered a production-ready MVP for an AI-powered legal assistant, helping the team validate demand and strengthen early product adoption.",
       highlights: [
-        "Built the MVP in under 2 months to help the startup validate product-market fit.",
-        "Improved onboarding with chatbot-driven UX to reduce friction for non-technical users.",
-        "Optimized frontend responsiveness and performance for a fast-growing startup product.",
-        "Enhanced AI prompt quality and generated response accuracy for better legal outcomes.",
+        "Built the MVP in under 8 weeks to support fast product validation and early traction.",
+        "Shipped a conversational experience with clear UX patterns for non-technical users.",
+        "Improved frontend responsiveness and reliability for a fast-moving product.",
+        "Collaborated on experience quality and prompt design to strengthen trust in the product.",
       ],
-      technologies: ["Next.js", "Python", "Supabase", "Vercel", "React"],
+      technologies: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"],
       gradient: "from-blue-600/20 via-sky-600/20 to-blue-600/20",
       accent: "from-blue-600 to-sky-500",
     },
@@ -27,14 +27,21 @@ export const projectsContent: ProjectsContent = {
       title: "E-commerce Platform",
       subtitle: "TD Synnex / Stellarity — Senior Frontend Developer",
       description:
-        "Led frontend development for a large-scale platform with 3D customization and international ecommerce workflows.",
+        "Led frontend development for a large-scale commerce platform with multilingual workflows and complex product customization.",
       highlights: [
-        "Delivered critical frontend features for a large-scale e-commerce platform across multiple APAC markets.",
-        "Improved page load times by ~30%, fixing slow UX issues that affected engagement.",
-        "Designed multilingual AEM solutions and defined state management for a multi-region app.",
-        "Refactored legacy modules and stabilized order flow to support major business contract renewal.",
+        "Delivered critical UI features for a high-volume e-commerce platform across APAC markets.",
+        "Improved load performance and stability, reducing friction in high-value customer journeys.",
+        "Implemented AEM-driven content solutions and scalable state handling for multi-region delivery.",
+        "Modernized legacy modules and supported a major business renewal with reliable frontend execution.",
       ],
-      technologies: ["React", "Next.js", "AEM", "Zustand", "Azure", "GraphQL"],
+      technologies: [
+        "React",
+        "Next.js",
+        "AEM",
+        "TypeScript",
+        "Azure",
+        "GraphQL",
+      ],
       gradient: "from-purple-600/20 via-pink-600/20 to-purple-600/20",
       accent: "from-purple-600 to-pink-500",
     },
@@ -42,11 +49,11 @@ export const projectsContent: ProjectsContent = {
       title: "Job Board Platform",
       subtitle: "Freelance — Frontend Developer",
       description:
-        "Delivered a high-performance job board and multiple frontend applications focused on architecture and usability.",
+        "Built a performant job board and supporting frontend applications with a focus on scalable architecture and user experience.",
       highlights: [
-        "Built a SPA job board platform that solved performance and usability challenges.",
-        "Created multiple apps with a focus on frontend architecture and fast loading experience.",
-        "Improved application structure for long-term maintainability and better user journeys.",
+        "Developed a responsive job board experience optimized for performance and usability.",
+        "Created reusable frontend patterns and a maintainable architecture across multiple products.",
+        "Improved long-term scalability and delivery speed through stronger structure and component design.",
       ],
       technologies: [
         "React",
