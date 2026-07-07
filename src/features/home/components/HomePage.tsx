@@ -1,4 +1,3 @@
-"use client";
 import { Container } from "@/components/layout/Container";
 import { Hero } from "./Hero";
 import { AboutPreview } from "./AboutPreview";
