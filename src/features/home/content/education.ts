@@ -5,7 +5,7 @@ export const educationContent: EducationContent = {
     badge: "Education",
     title: "Continuous Learning",
     description:
-      "Self-taught Frontend Developer with strong project ownership, detail-driven execution, and a civil engineering architecture background that brings disciplined design thinking to modern UI work.",
+      "Senior Frontend Developer with 5+ years of experience building scalable web applications using React, Next.js and TypeScript.",
   },
   items: [
     {
