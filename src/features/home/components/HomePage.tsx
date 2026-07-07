@@ -15,7 +15,7 @@ import { contactContent } from "../content/contact";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="pt-20 md:pt-24">
       <Navbar />
       <Section id="home">
         <Container>

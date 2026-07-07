@@ -5,6 +5,10 @@ import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/components/providers/Providers";
+import {
+  AmbientBackground,
+  ParticlesBackground,
+} from "@/components/animations/AmbientBackground";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -61,11 +65,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           crossOrigin="anonymous"
         />
       </head>
-      <body className="bg-background text-foreground min-h-screen">
+      <body className="bg-background text-foreground min-h-screen overflow-x-hidden">
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <Providers>{children}</Providers>
+        <div className="relative isolate min-h-screen overflow-hidden">
+          <AmbientBackground />
+          <ParticlesBackground />
+          <div className="relative z-10">
+            <Providers>{children}</Providers>
+          </div>
+        </div>
       </body>
     </html>
   );
