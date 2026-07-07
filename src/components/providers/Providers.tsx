@@ -8,7 +8,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider
       attribute="class"
       defaultTheme="dark"
+      storageKey="theme"
       enableSystem={false}
+      themes={["dark", "light"]}
       disableTransitionOnChange
     >
       <PageTransition>{children}</PageTransition>
