@@ -1,55 +1,61 @@
 "use client";
 
+import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
-import { usePrefersReducedMotion } from "@/hooks/useAnimations";
+import {
+  usePrefersReducedMotion,
+  useSmoothScroll,
+} from "@/hooks/useAnimations";
+
+interface ScrollIndicatorProps {
+  targetSectionId?: string;
+  className?: string;
+}
 
 /**
- * Animated scroll indicator with smooth bouncing animation
+ * Accessible scroll indicator with responsive layout and hover bounce animation
  */
-export function ScrollIndicator() {
+export function ScrollIndicator({
+  targetSectionId = "about",
+  className = "",
+}: ScrollIndicatorProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { scrollToSection } = useSmoothScroll();
 
-  if (prefersReducedMotion) {
-    return (
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-foreground/50 text-xs">Scroll to explore</span>
-          <div className="border-foreground/30 flex h-6 w-4 items-center justify-center rounded-full border">
-            <div className="bg-foreground/50 h-1 w-1 rounded-full" />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleClick = () => {
+    scrollToSection(targetSectionId);
+  };
 
   return (
-    <motion.div
-      animate={{ y: [0, 8, 0] }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      className="absolute bottom-8 left-1/2 -translate-x-1/2"
-    >
-      <div className="flex flex-col items-center gap-2">
-        <span className="text-foreground/50 text-xs">Scroll to explore</span>
-        <div className="border-foreground/30 flex h-6 w-4 items-center justify-center rounded-full border">
-          <motion.div
-            className="bg-foreground/50 h-1 w-1 rounded-full"
-            animate={{
-              opacity: [1, 0.3, 1],
-              scale: [1, 0.8, 1],
-            }}
-            transition={{
-              duration: 2,
+    <motion.button
+      type="button"
+      onClick={handleClick}
+      whileHover={
+        prefersReducedMotion ? { scale: 1.02 } : { y: [0, -6, 0], scale: 1.03 }
+      }
+      whileTap={prefersReducedMotion ? {} : { scale: 0.97 }}
+      transition={
+        prefersReducedMotion
+          ? { duration: 0.2 }
+          : {
+              duration: 0.7,
               repeat: Infinity,
+              repeatType: "mirror",
               ease: "easeInOut",
-            }}
-          />
-        </div>
-      </div>
-    </motion.div>
+            }
+      }
+      className={`text-foreground/70 focus-visible:ring-primary/70 focus-visible:ring-offset-background mx-auto flex w-full max-w-fit flex-col items-center justify-center gap-2 rounded-full px-4 py-3 text-center transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:gap-3 sm:px-5 sm:py-4 ${className}`}
+      aria-controls={targetSectionId}
+      aria-label="Scroll to explore"
+      title="Scroll to explore"
+    >
+      <span className="text-foreground/70 text-[0.65rem] font-medium tracking-[0.3em] uppercase sm:text-xs">
+        Scroll to explore
+      </span>
+      <span className="border-foreground/30 bg-background/70 ring-foreground/10 flex h-7 w-5 items-center justify-center rounded-full border shadow-sm ring-1 sm:h-8 sm:w-6">
+        <ArrowDown className="text-foreground/70 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+      </span>
+    </motion.button>
   );
 }
 
