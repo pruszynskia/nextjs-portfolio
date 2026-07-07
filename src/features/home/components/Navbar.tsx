@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X, Download } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [hasMounted, setHasMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -18,11 +20,14 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
+    const id = window.setTimeout(() => setHasMounted(true), 0);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  const isDarkMode = hasMounted ? theme === "dark" : true;
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   const navLinks = [
