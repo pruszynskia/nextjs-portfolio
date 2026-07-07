@@ -71,12 +71,13 @@ export function Contact({ content }: { content?: ContactContent }) {
   };
 
   return (
-    <motion.div
+    <motion.section
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       className="space-y-12"
+      aria-labelledby="contact-heading"
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4 text-center">
@@ -86,7 +87,10 @@ export function Contact({ content }: { content?: ContactContent }) {
             {content?.header?.badge ?? "Get In Touch"}
           </span>
         </div>
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
+        <h2
+          id="contact-heading"
+          className="text-4xl font-bold tracking-tight md:text-5xl"
+        >
           {content?.header?.title ?? "Let's Work Together"}
         </h2>
         <p className="text-foreground/60 mx-auto max-w-2xl text-lg">
@@ -100,63 +104,70 @@ export function Contact({ content }: { content?: ContactContent }) {
         {/* Contact Methods */}
         <motion.div variants={itemVariants} className="space-y-6">
           <h3 className="text-foreground text-2xl font-bold">Contact Info</h3>
-          <div className="space-y-4">
+          <ul className="space-y-4" aria-label="Contact options">
             {contactMethods.map((method: ContactMethod, idx: number) => {
               const iconMap: IconMap = { Mail, MessageSquare };
               const Icon = iconMap[method.icon] ?? Mail;
               return (
-                <motion.a
-                  key={idx}
-                  href={method.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ x: 4 }}
-                  className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
-                >
-                  <div className="flex-shrink-0 rounded-full bg-gradient-to-br from-pink-600/20 to-rose-600/20 p-3">
-                    <Icon size={24} className="text-white" />
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-foreground/60 text-sm font-medium">
-                      {method.label}
-                    </p>
-                    <p className="text-foreground text-lg font-semibold">
-                      {method.value}
-                    </p>
-                  </div>
-                  <ArrowRight
-                    size={20}
-                    className="text-foreground/30 group-hover:text-foreground/60 ml-auto flex-shrink-0 transition-all group-hover:translate-x-1"
-                  />
-                </motion.a>
+                <li key={idx} className="list-none">
+                  <motion.a
+                    href={method.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 4 }}
+                    className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
+                    aria-label={`${method.label}: ${method.value}`}
+                  >
+                    <div
+                      className="flex-shrink-0 rounded-full bg-gradient-to-br from-pink-600/20 to-rose-600/20 p-3"
+                      aria-hidden="true"
+                    >
+                      <Icon size={24} className="text-white" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-foreground/60 text-sm font-medium">
+                        {method.label}
+                      </p>
+                      <p className="text-foreground text-lg font-semibold">
+                        {method.value}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      size={20}
+                      aria-hidden="true"
+                      className="text-foreground/30 group-hover:text-foreground/60 ml-auto flex-shrink-0 transition-all group-hover:translate-x-1"
+                    />
+                  </motion.a>
+                </li>
               );
             })}
-          </div>
+          </ul>
           {/* Social Links */}
           <div className="pt-6">
             <h3 className="text-foreground mb-4 text-lg font-semibold">
               Connect On Social
             </h3>
-            <div className="flex gap-4">
+            <ul className="flex gap-4" aria-label="Social links">
               {socialLinks.map((social: SocialLink, idx: number) => {
                 const iconMap: IconMap = { FaGithub, FaLinkedin };
                 const Icon = iconMap[social.icon] ?? FaGithub;
                 return (
-                  <motion.a
-                    key={idx}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color ?? ""}`}
-                    aria-label={social.label}
-                  >
-                    <Icon size={24} />
-                  </motion.a>
+                  <li key={idx} className="list-none">
+                    <motion.a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color ?? ""}`}
+                      aria-label={social.label}
+                    >
+                      <Icon size={24} aria-hidden="true" />
+                    </motion.a>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
         </motion.div>
 
@@ -172,15 +183,20 @@ export function Contact({ content }: { content?: ContactContent }) {
 
             {/* Name Field */}
             <div className="space-y-2">
-              <label className="text-foreground/80 block text-sm font-medium">
+              <label
+                htmlFor="contact-name"
+                className="text-foreground/80 block text-sm font-medium"
+              >
                 Your Name
               </label>
               <input
+                id="contact-name"
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
+                autoComplete="name"
                 className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="John Doe"
               />
@@ -188,15 +204,20 @@ export function Contact({ content }: { content?: ContactContent }) {
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="text-foreground/80 block text-sm font-medium">
+              <label
+                htmlFor="contact-email"
+                className="text-foreground/80 block text-sm font-medium"
+              >
                 Your Email
               </label>
               <input
+                id="contact-email"
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
                 className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="john@example.com"
               />
@@ -204,15 +225,20 @@ export function Contact({ content }: { content?: ContactContent }) {
 
             {/* Message Field */}
             <div className="space-y-2">
-              <label className="text-foreground/80 block text-sm font-medium">
+              <label
+                htmlFor="contact-message"
+                className="text-foreground/80 block text-sm font-medium"
+              >
                 Message
               </label>
               <textarea
+                id="contact-message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 rows={5}
+                autoComplete="off"
                 className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
                 placeholder="Tell me about your project..."
               />
@@ -245,6 +271,8 @@ export function Contact({ content }: { content?: ContactContent }) {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="rounded-lg border border-green-600/50 bg-green-600/20 p-4 text-center text-sm font-medium text-green-600"
+                role="status"
+                aria-live="polite"
               >
                 ✓ Message sent successfully!
               </motion.div>
@@ -252,6 +280,6 @@ export function Contact({ content }: { content?: ContactContent }) {
           </form>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }

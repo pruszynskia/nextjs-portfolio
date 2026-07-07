@@ -25,24 +25,35 @@ export function SocialLinks({
 
         if (link.icon === "github") {
           return (
-            <motion.a key={idx} {...baseProps}>
-              <FaGithub size={24} />
+            <motion.a
+              key={idx}
+              {...baseProps}
+              aria-label={link.label || "Visit GitHub profile"}
+            >
+              <FaGithub size={24} aria-hidden="true" />
             </motion.a>
           );
         }
 
         if (link.icon === "linkedin") {
           return (
-            <motion.a key={idx} {...baseProps}>
-              <FaLinkedin size={24} />
+            <motion.a
+              key={idx}
+              {...baseProps}
+              aria-label={link.label || "Visit LinkedIn profile"}
+            >
+              <FaLinkedin size={24} aria-hidden="true" />
             </motion.a>
           );
         }
 
-        // default to mail icon
         return (
-          <motion.a key={idx} {...baseProps}>
-            <Mail size={24} />
+          <motion.a
+            key={idx}
+            {...baseProps}
+            aria-label={link.label || "Send an email"}
+          >
+            <Mail size={24} aria-hidden="true" />
           </motion.a>
         );
       })}

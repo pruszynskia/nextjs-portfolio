@@ -23,12 +23,13 @@ export function AboutPreview() {
   };
 
   return (
-    <motion.div
+    <motion.section
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       className="space-y-12"
+      aria-labelledby="about-preview-heading"
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-4">
@@ -36,7 +37,10 @@ export function AboutPreview() {
           <Sparkles size={16} className="text-emerald-600" />
           <span className="text-foreground/60 text-sm">About Me</span>
         </div>
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
+        <h2
+          id="about-preview-heading"
+          className="text-4xl font-bold tracking-tight md:text-5xl"
+        >
           Crafting Digital Experiences
         </h2>
       </motion.div>
@@ -70,9 +74,10 @@ export function AboutPreview() {
             whileHover={{ scale: 1.05, x: 4 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-lg font-semibold text-transparent transition-opacity hover:opacity-80"
+            aria-label="Get to know me better"
           >
             Get to know me better
-            <ArrowRight size={20} />
+            <ArrowRight size={20} aria-hidden="true" />
           </motion.a>
         </div>
 
@@ -99,6 +104,6 @@ export function AboutPreview() {
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }

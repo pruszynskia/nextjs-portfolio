@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 type RootLayoutProps = {
   children: React.ReactNode;
 };
@@ -40,9 +45,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className={cn("font-sans", geist.variable)}
       suppressHydrationWarning
     >
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Next.js App Router</title>
       <body className="bg-background text-foreground min-h-screen">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Providers>{children}</Providers>
       </body>
     </html>

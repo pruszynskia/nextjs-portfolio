@@ -13,7 +13,7 @@ function SectionHeader({
   center?: boolean;
 }) {
   return (
-    <div className={center ? "space-y-4 text-center" : "space-y-4"}>
+    <header className={center ? "space-y-4 text-center" : "space-y-4"}>
       <div className={center ? "flex justify-center" : "inline-flex"}>
         {badge ? <Badge>{badge}</Badge> : null}
       </div>
@@ -29,7 +29,7 @@ function SectionHeader({
           {description}
         </p>
       ) : null}
-    </div>
+    </header>
   );
 }
 

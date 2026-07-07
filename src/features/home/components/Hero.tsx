@@ -28,11 +28,12 @@ export function Hero({ content }: { content?: HeroContent }) {
   };
 
   return (
-    <motion.div
+    <motion.section
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       className="flex flex-col items-start justify-center gap-8 py-32"
+      aria-labelledby="hero-heading"
     >
       <ParticlesBackground />
       <StatusBadge variants={itemVariants} text={content?.badgeText ?? ""} />
@@ -54,6 +55,7 @@ export function Hero({ content }: { content?: HeroContent }) {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        aria-label="Scroll to explore"
       >
         <div className="flex flex-col items-center gap-2">
           <span className="text-foreground/50 text-xs">Scroll to explore</span>
@@ -62,6 +64,6 @@ export function Hero({ content }: { content?: HeroContent }) {
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }

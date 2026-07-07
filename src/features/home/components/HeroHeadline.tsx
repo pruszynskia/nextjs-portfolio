@@ -18,7 +18,10 @@ export function HeroHeadline({
       <motion.p className="text-foreground/60 text-lg font-medium">
         {greeting}
       </motion.p>
-      <h1 className="text-6xl font-bold tracking-tight md:text-7xl">
+      <h1
+        id="hero-heading"
+        className="text-6xl font-bold tracking-tight md:text-7xl"
+      >
         <motion.span
           className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
           animate={{ opacity: [0.8, 1, 0.8] }}

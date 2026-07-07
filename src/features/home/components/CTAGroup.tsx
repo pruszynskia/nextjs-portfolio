@@ -20,9 +20,10 @@ export function CTAGroup({
               whileHover={{ scale: 1.05, gap: 8 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl"
+              aria-label={cta.label}
             >
               {cta.label}
-              <ArrowRight size={20} />
+              <ArrowRight size={20} aria-hidden="true" />
             </motion.a>
           );
         }
@@ -34,6 +35,7 @@ export function CTAGroup({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="text-foreground rounded-lg border border-slate-200 px-8 py-3 font-semibold transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/20 dark:hover:border-white/40 dark:hover:bg-white/5"
+            aria-label={cta.label}
           >
             {cta.label}
           </motion.a>
