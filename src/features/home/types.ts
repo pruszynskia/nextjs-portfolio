@@ -1,4 +1,4 @@
-import type { ComponentType, SVGProps } from "react";
+import type { ComponentType } from "react";
 
 export type CTA = {
   label: string;
