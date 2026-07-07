@@ -38,9 +38,9 @@ export function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       aria-label="Primary"
-      className={`sticky top-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all duration-300 ${
         scrolled
-          ? "border-b border-slate-200 bg-slate-50 backdrop-blur-md dark:border-white/5 dark:bg-black/30"
+          ? "border-b border-slate-200 bg-slate-50/95 backdrop-blur-md dark:border-white/5 dark:bg-black/30"
           : "bg-transparent"
       }`}
     >
