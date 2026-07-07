@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 export function Navbar() {
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [hasMounted, setHasMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,8 +32,17 @@ export function Navbar() {
     setTheme(isDarkMode ? "light" : "dark");
   };
 
+  const handleHomeNavigation = (
+    event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+  ) => {
+    event?.preventDefault();
+    setIsOpen(false);
+    router.push("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const navLinks = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/", onClick: handleHomeNavigation },
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
@@ -50,7 +61,8 @@ export function Navbar() {
       }`}
     >
       <motion.a
-        href="#home"
+        href="/"
+        onClick={handleHomeNavigation}
         whileHover={{ scale: 1.05 }}
         className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-lg font-bold text-transparent"
       >
@@ -62,6 +74,7 @@ export function Navbar() {
           <li key={idx}>
             <motion.a
               href={link.href}
+              onClick={link.onClick}
               className="text-foreground/80 hover:text-foreground relative text-sm font-medium transition-colors"
               whileHover={{ y: -2 }}
             >
@@ -140,7 +153,9 @@ export function Navbar() {
               <a
                 href={link.href}
                 className="text-foreground/80 hover:text-foreground text-sm font-medium transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={(event) => {
+                  link.onClick?.(event);
+                }}
               >
                 {link.name}
               </a>
