@@ -1,12 +1,12 @@
 import type { HeroContent } from "../types";
 
 export const heroContent: HeroContent = {
-  badgeText: "Available for freelance work",
-  greeting: "Hey, I'm",
+  badgeText: "Open to senior frontend opportunities",
+  greeting: "Hello, I'm",
   name: "Andrzej Pruszyński",
-  title: "Senior Frontend Developer",
+  title: "Senior Frontend Engineer",
   description:
-    "I craft beautiful, high-performance web experiences. With 5+ years building scalable applications, I specialize in React, Next.js, and modern architecture. Let's build something extraordinary together.",
+    "Senior Frontend Engineer with 5+ years of experience building React and Next.js applications that are fast, accessible, and ready to scale. I focus on architecture, component design, and delivering measurable product impact.",
   ctas: [
     { label: "View My Work", href: "#projects", variant: "primary" },
     { label: "Get in Touch", href: "#contact", variant: "outline" },

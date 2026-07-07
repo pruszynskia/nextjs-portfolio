@@ -3,9 +3,9 @@ import type { ContactContent } from "../types";
 export const contactContent: ContactContent = {
   header: {
     badge: "Get In Touch",
-    title: "Let's Work Together",
+    title: "Let’s Connect",
     description:
-      "Have a project in mind or want to chat? I'd love to hear from you. Reach out through any of these channels.",
+      "I’m interested in senior frontend roles and product-focused engineering work where strong UI craft, architecture, and measurable impact matter.",
   },
   contactMethods: [
     {

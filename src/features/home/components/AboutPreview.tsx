@@ -41,7 +41,7 @@ export function AboutPreview() {
           id="about-preview-heading"
           className="text-4xl font-bold tracking-tight md:text-5xl"
         >
-          Crafting Digital Experiences
+          Frontend engineering with business impact
         </h2>
       </motion.div>
 
@@ -50,23 +50,23 @@ export function AboutPreview() {
         {/* Left Column - Bio */}
         <div className="space-y-6">
           <p className="text-foreground/80 text-lg leading-relaxed">
-            I&apos;m a passionate Senior Frontend Developer with over 5 years of
-            experience building scalable, high-performance web applications. My
-            journey in tech has been driven by a love for solving complex
-            problems and creating intuitive user experiences.
+            I&apos;m a Senior Frontend Engineer with 5+ years of experience
+            building React, Next.js, and TypeScript products for enterprise and
+            growth-stage teams. My work combines strong engineering fundamentals
+            with a product-minded approach to delivery.
           </p>
 
           <p className="text-foreground/80 text-lg leading-relaxed">
-            At TD Synnex, I led frontend initiatives for enterprise e-commerce
-            platforms, improving performance by 30% and architecting solutions
-            for multi-region deployments. I thrive in collaborative environments
-            where I can mentor teams and drive technical excellence.
+            At TD Synnex, I led frontend work for large-scale commerce
+            platforms, improving performance, supporting multilingual and
+            multi-region experiences, and helping ship reliable solutions in
+            complex business environments.
           </p>
 
           <p className="text-foreground/80 text-lg leading-relaxed">
-            When I&apos;m not coding, I&apos;m exploring new technologies,
-            contributing to open-source projects, or sharing knowledge with the
-            developer community.
+            I care about clean architecture, reusable UI systems, accessible
+            experiences, and pragmatic decisions that make products easier to
+            scale and maintain over time.
           </p>
 
           <motion.a
@@ -85,9 +85,9 @@ export function AboutPreview() {
         <div className="space-y-4">
           {[
             { label: "Years Experience", value: "5+" },
-            { label: "Projects Completed", value: "20+" },
-            { label: "Happy Clients", value: "7+" },
-            { label: "Technologies Mastered", value: "20+" },
+            { label: "Enterprise Platforms", value: "3+" },
+            { label: "Core Technologies", value: "React / Next.js" },
+            { label: "Performance Focus", value: "Accessibility & SEO" },
           ].map((stat, idx) => (
             <motion.div
               key={idx}
