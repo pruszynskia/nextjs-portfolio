@@ -733,28 +733,6 @@
       "score": null,
       "scoreDisplayMode": "notApplicable"
     },
-    "skip-link": {
-      "id": "skip-link",
-      "title": "Skip links are focusable.",
-      "description": "Including a skip link can help users skip to the main content to save time. [Learn more about skip links](https://dequeuniversity.com/rules/axe/4.10/skip-link).",
-      "score": 1,
-      "scoreDisplayMode": "binary",
-      "details": {
-        "type": "table",
-        "headings": [
-          {
-            "key": "node",
-            "valueType": "node",
-            "subItemsHeading": {
-              "key": "relatedNode",
-              "valueType": "node"
-            },
-            "label": "Failing Elements"
-          }
-        ],
-        "items": []
-      }
-    },
     "tabindex": {
       "id": "tabindex",
       "title": "No element has a `[tabindex]` value greater than 0",
@@ -1229,11 +1207,7 @@
           "weight": 0,
           "group": "a11y-names-labels"
         },
-        {
-          "id": "skip-link",
-          "weight": 3,
-          "group": "a11y-names-labels"
-        },
+
         {
           "id": "tabindex",
           "weight": 7,
@@ -1907,12 +1881,6 @@
         "entryType": "measure"
       },
       {
-        "startTime": 8689.09,
-        "name": "lh:audit:skip-link",
-        "duration": 1,
-        "entryType": "measure"
-      },
-      {
         "startTime": 8690.17,
         "name": "lh:audit:tabindex",
         "duration": 1.08,
@@ -2142,7 +2110,6 @@
         "audits.list.details.headings[0].label",
         "audits.listitem.details.headings[0].label",
         "audits[meta-viewport].details.headings[0].label",
-        "audits[skip-link].details.headings[0].label",
         "audits.tabindex.details.headings[0].label",
         "audits[target-size].details.headings[0].label"
       ],
@@ -2278,9 +2245,7 @@
       "core/audits/accessibility/button-name.js | description": [
         "audits[button-name].description"
       ],
-      "core/audits/accessibility/bypass.js | title": [
-        "audits.bypass.title"
-      ],
+      "core/audits/accessibility/bypass.js | title": ["audits.bypass.title"],
       "core/audits/accessibility/bypass.js | description": [
         "audits.bypass.description"
       ],
@@ -2296,9 +2261,7 @@
       "core/audits/accessibility/definition-list.js | description": [
         "audits[definition-list].description"
       ],
-      "core/audits/accessibility/dlitem.js | title": [
-        "audits.dlitem.title"
-      ],
+      "core/audits/accessibility/dlitem.js | title": ["audits.dlitem.title"],
       "core/audits/accessibility/dlitem.js | description": [
         "audits.dlitem.description"
       ],
@@ -2392,9 +2355,7 @@
       "core/audits/accessibility/label-content-name-mismatch.js | description": [
         "audits[label-content-name-mismatch].description"
       ],
-      "core/audits/accessibility/label.js | title": [
-        "audits.label.title"
-      ],
+      "core/audits/accessibility/label.js | title": ["audits.label.title"],
       "core/audits/accessibility/label.js | description": [
         "audits.label.description"
       ],
@@ -2416,9 +2377,7 @@
       "core/audits/accessibility/link-in-text-block.js | description": [
         "audits[link-in-text-block].description"
       ],
-      "core/audits/accessibility/list.js | title": [
-        "audits.list.title"
-      ],
+      "core/audits/accessibility/list.js | title": ["audits.list.title"],
       "core/audits/accessibility/list.js | description": [
         "audits.list.description"
       ],
@@ -2452,12 +2411,7 @@
       "core/audits/accessibility/select-name.js | description": [
         "audits[select-name].description"
       ],
-      "core/audits/accessibility/skip-link.js | title": [
-        "audits[skip-link].title"
-      ],
-      "core/audits/accessibility/skip-link.js | description": [
-        "audits[skip-link].description"
-      ],
+
       "core/audits/accessibility/tabindex.js | title": [
         "audits.tabindex.title"
       ],

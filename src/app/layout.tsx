@@ -66,9 +66,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body className="bg-background text-foreground min-h-screen overflow-x-hidden">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
         <div className="relative isolate min-h-screen overflow-hidden">
           <AmbientBackground />
           <ParticlesBackground />
