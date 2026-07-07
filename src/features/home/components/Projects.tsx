@@ -9,12 +9,13 @@ export function Projects({ content }: { content?: ProjectsContent }) {
   const projects: Project[] = content?.items ?? [];
 
   return (
-    <motion.div
+    <motion.section
       variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       className="space-y-12"
+      aria-labelledby="projects-heading"
     >
       {/* Header */}
       <motion.div variants={fadeInUp} className="space-y-4">
@@ -36,77 +37,80 @@ export function Projects({ content }: { content?: ProjectsContent }) {
       </motion.div>
 
       {/* Projects Grid */}
-      <motion.div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+      <motion.ul
+        className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3"
+        aria-label="Featured projects"
+      >
         {projects.map((project: Project, idx: number) => (
-          <motion.div
-            key={idx}
-            variants={cardReveal}
-            whileHover={{
-              y: -8,
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-            }}
-            className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
-          >
-            <div className="relative space-y-6 p-8">
-              {/* Header */}
-              <div className="space-y-3">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h3 className="text-foreground text-2xl font-bold">
-                      {project.title}
-                    </h3>
-                    <p className="text-foreground/60 text-sm">
-                      {project.subtitle}
-                    </p>
+          <motion.li key={idx} variants={cardReveal} className="list-none">
+            <motion.article
+              whileHover={{
+                y: -8,
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+              }}
+              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
+            >
+              <div className="relative space-y-6 p-8">
+                {/* Header */}
+                <div className="space-y-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="text-foreground text-2xl font-bold">
+                        {project.title}
+                      </h3>
+                      <p className="text-foreground/60 text-sm">
+                        {project.subtitle}
+                      </p>
+                    </div>
+                    <div
+                      className={`h-1 w-24 rounded-full bg-gradient-to-r ${project.accent}`}
+                    />
                   </div>
-                  <div
-                    className={`h-1 w-24 rounded-full bg-gradient-to-r ${project.accent}`}
-                  />
+                  <p className="text-foreground/70 leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
-                <p className="text-foreground/70 leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
 
-              {/* Highlights */}
-              <div className="space-y-3">
-                <h4 className="text-foreground text-foreground/60 text-sm font-semibold tracking-[0.2em] uppercase">
-                  What I delivered
-                </h4>
-                <ul className="text-foreground/70 space-y-2">
-                  {project.highlights.map(
-                    (highlight: string, highlightIdx: number) => (
-                      <motion.li
-                        key={highlightIdx}
-                        initial={{ opacity: 0, x: -12 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: highlightIdx * 0.05 }}
-                        className="flex gap-3 text-sm leading-relaxed"
-                      >
-                        <span className="bg-foreground mt-1 inline-flex h-2 w-2 shrink-0 rounded-full" />
-                        <span>{highlight}</span>
-                      </motion.li>
-                    ),
-                  )}
-                </ul>
-              </div>
+                {/* Highlights */}
+                <div className="space-y-3">
+                  <h4 className="text-foreground text-foreground/60 text-sm font-semibold tracking-[0.2em] uppercase">
+                    What I delivered
+                  </h4>
+                  <ul className="text-foreground/70 space-y-2">
+                    {project.highlights.map(
+                      (highlight: string, highlightIdx: number) => (
+                        <motion.li
+                          key={highlightIdx}
+                          initial={{ opacity: 0, x: -12 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: highlightIdx * 0.05 }}
+                          className="flex gap-3 text-sm leading-relaxed"
+                        >
+                          <span className="bg-foreground mt-1 inline-flex h-2 w-2 shrink-0 rounded-full" />
+                          <span>{highlight}</span>
+                        </motion.li>
+                      ),
+                    )}
+                  </ul>
+                </div>
 
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {project.technologies.map((tech: string, techIdx: number) => (
-                  <motion.span
-                    key={techIdx}
-                    whileHover={{ scale: 1.05 }}
-                    className={`inline-flex items-center rounded-full border border-white/10 bg-gradient-to-r ${project.accent} bg-clip-text px-3 py-1 text-sm font-medium text-transparent`}
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {project.technologies.map((tech: string, techIdx: number) => (
+                    <motion.span
+                      key={techIdx}
+                      whileHover={{ scale: 1.05 }}
+                      className={`inline-flex items-center rounded-full border border-white/10 bg-gradient-to-r ${project.accent} bg-clip-text px-3 py-1 text-sm font-medium text-transparent`}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.article>
+          </motion.li>
         ))}
-      </motion.div>
-    </motion.div>
+      </motion.ul>
+    </motion.section>
   );
 }
