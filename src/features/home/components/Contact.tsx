@@ -128,7 +128,7 @@ export function Contact({ content }: { content?: ContactContent }) {
                       <p className="text-foreground/60 text-sm font-medium">
                         {method.label}
                       </p>
-                      <p className="text-foreground text-lg font-semibold">
+                      <p className="text-foreground text-lg font-semibold break-all">
                         {method.value}
                       </p>
                     </div>
