@@ -56,7 +56,7 @@ export function Navbar() {
       aria-label="Primary"
       className={`fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all duration-300 ${
         scrolled
-          ? "border-b border-slate-200 bg-slate-50/95 backdrop-blur-md dark:border-white/5 dark:bg-black/30"
+          ? "border-b border-slate-200 bg-slate-50/95 backdrop-blur-md dark:border-white/5 dark:bg-black/80"
           : "bg-transparent"
       }`}
     >
@@ -145,7 +145,7 @@ export function Navbar() {
           closed: { opacity: 0, height: 0 },
         }}
         transition={{ duration: 0.3 }}
-        className="absolute top-full right-0 left-0 overflow-hidden border-b border-slate-200 bg-slate-50 backdrop-blur-md md:hidden dark:border-white/5 dark:bg-black/20"
+        className="absolute top-full right-0 left-0 overflow-hidden border-b border-slate-200 bg-slate-50 backdrop-blur-md md:hidden dark:border-white/5 dark:bg-black/80"
       >
         <ul className="flex flex-col gap-4 px-6 py-4">
           {navLinks.map((link, idx) => (
