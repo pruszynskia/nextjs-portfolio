@@ -2,49 +2,31 @@ import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import type { SocialLink } from "../types";
 
+const ICONS = {
+  github: { Icon: FaGithub, fallbackLabel: "Visit GitHub profile" },
+  linkedin: { Icon: FaLinkedin, fallbackLabel: "Visit LinkedIn profile" },
+  FaGithub: { Icon: FaGithub, fallbackLabel: "Visit GitHub profile" },
+  FaLinkedin: { Icon: FaLinkedin, fallbackLabel: "Visit LinkedIn profile" },
+  mail: { Icon: Mail, fallbackLabel: "Send an email" },
+} as const;
+
+/** Single-colour icons, no brand tints, no hover lift (07-anti-patterns.md). */
 export function SocialLinks({ links }: { links: SocialLink[] }) {
   return (
-    <div className="flex gap-6 pt-8">
-      {links.map((link: SocialLink, idx: number) => {
-        const baseProps = {
-          href: link.href,
-          target: "_blank",
-          rel: "noopener noreferrer",
-          className:
-            "text-foreground/60 hover:text-foreground rounded-full p-3 transition-all hover:-translate-y-0.5 hover:bg-slate-100 dark:hover:bg-white/5",
-        } as const;
-
-        if (link.icon === "github") {
-          return (
-            <a
-              key={idx}
-              {...baseProps}
-              aria-label={link.label || "Visit GitHub profile"}
-            >
-              <FaGithub size={24} aria-hidden="true" />
-            </a>
-          );
-        }
-
-        if (link.icon === "linkedin") {
-          return (
-            <a
-              key={idx}
-              {...baseProps}
-              aria-label={link.label || "Visit LinkedIn profile"}
-            >
-              <FaLinkedin size={24} aria-hidden="true" />
-            </a>
-          );
-        }
+    <div className="flex gap-5">
+      {links.map((link, idx) => {
+        const { Icon, fallbackLabel } = ICONS[link.icon] ?? ICONS.mail;
 
         return (
           <a
             key={idx}
-            {...baseProps}
-            aria-label={link.label || "Send an email"}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label || fallbackLabel}
+            className="text-ink-muted hover:text-ink transition-colors duration-[120ms]"
           >
-            <Mail size={24} aria-hidden="true" />
+            <Icon size={19} aria-hidden="true" />
           </a>
         );
       })}

@@ -1,3 +1,9 @@
+/*
+  Section padding is 128px / 192px (--space-10 / --space-11) — 04-spacing-layout.md
+  calls the generous whitespace non-negotiable and names "64px pretending to be
+  generous" as the likely regression. Hairline rule between sections, no gradient
+  wash, no decorative overlay.
+*/
 export function Section({
   children,
   id,
@@ -11,9 +17,8 @@ export function Section({
     <section
       id={id}
       aria-labelledby={id ? `${id}-heading` : undefined}
-      className={`relative border-b border-white/5 py-24 md:py-32 ${className ?? ""}`}
+      className={`border-hairline relative border-b py-32 md:py-48 ${className ?? ""}`}
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-white/[0.02] via-transparent to-transparent" />
       {children}
     </section>
   );

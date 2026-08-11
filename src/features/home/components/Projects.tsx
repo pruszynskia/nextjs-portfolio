@@ -1,116 +1,76 @@
-"use client";
-import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { staggerContainer, fadeInUp, cardReveal } from "@/lib/animations";
+import { SectionHeading } from "@/components/layout/SectionHeading";
+import { Tag } from "@/components/ui/Tag";
+import { ProjectGraphic } from "./ProjectGraphic";
 import type { ProjectsContent, Project } from "../types";
 
+/*
+  The project index — the signature component (05-components.md). Rendered
+  full-bleed, ignoring Container: this is the page's one deliberate break out
+  of the grid (04-spacing-layout.md). Rest state is flat/scannable — only the
+  hovered row picks up shadow-raised and its thumbnail.
+*/
 export function Projects({ content }: { content?: ProjectsContent }) {
   const projects: Project[] = content?.items ?? [];
 
   return (
-    <motion.section
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className="space-y-12"
-      aria-labelledby="projects-heading"
-    >
-      {/* Header */}
-      <motion.div variants={fadeInUp} className="space-y-4">
-        <SectionHeader
-          badge={
-            <>
-              <Sparkles size={16} className="text-purple-600" />
-              <span className="text-foreground/60 text-sm">
-                {content?.header?.badge ?? "Featured Projects"}
-              </span>
-            </>
-          }
-          title={content?.header?.title ?? "Work I'm proud of"}
-          description={
-            content?.header?.description ??
-            "A selection of projects that showcase my expertise and passion for building beautiful, functional solutions."
-          }
+    <div aria-labelledby="projects-heading">
+      <div className="max-w-editorial mx-auto px-4 md:px-8">
+        <SectionHeading
+          id="projects"
+          eyebrow={content?.header?.badge ?? "Projects"}
+          title={content?.header?.title ?? "Selected Work"}
+          description={content?.header?.description}
         />
-      </motion.div>
+      </div>
 
-      {/* Projects Grid */}
-      <motion.ul
-        className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3"
-        aria-label="Featured projects"
+      <ul
+        className="border-hairline mt-16 border-t"
+        aria-label="Selected projects"
       >
-        {projects.map((project: Project, idx: number) => (
-          <motion.li key={idx} variants={cardReveal} className="list-none">
-            <motion.article
-              whileHover={{
-                y: -8,
-                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-              }}
-              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
-            >
-              <div className="relative space-y-6 p-8">
-                {/* Header */}
-                <div className="space-y-3">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <h3 className="text-foreground text-2xl font-bold">
-                        {project.title}
-                      </h3>
-                      <p className="text-foreground/60 text-sm">
-                        {project.subtitle}
-                      </p>
-                    </div>
-                    <div
-                      className={`h-1 w-24 rounded-full bg-gradient-to-r ${project.accent}`}
-                    />
-                  </div>
-                  <p className="text-foreground/70 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
+        {projects.map((project, idx) => (
+          <li
+            key={project.index}
+            className="group border-hairline hover:border-strong hover:shadow-raised relative border-b transition-[border-color,box-shadow] duration-[180ms]"
+          >
+            <div className="max-w-editorial relative mx-auto grid grid-cols-12 items-center gap-x-6 gap-y-4 px-4 py-12 md:px-8 md:py-16">
+              <span className="text-ink-muted text-label col-span-2 font-mono uppercase md:col-span-1">
+                {project.index}
+              </span>
 
-                {/* Highlights */}
-                <div className="space-y-3">
-                  <h4 className="text-foreground text-foreground/60 text-sm font-semibold tracking-[0.2em] uppercase">
-                    What I delivered
-                  </h4>
-                  <ul className="text-foreground/70 space-y-2">
-                    {project.highlights.map(
-                      (highlight: string, highlightIdx: number) => (
-                        <motion.li
-                          key={highlightIdx}
-                          initial={{ opacity: 0, x: -12 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: highlightIdx * 0.05 }}
-                          className="flex gap-3 text-sm leading-relaxed"
-                        >
-                          <span className="bg-foreground mt-1 inline-flex h-2 w-2 shrink-0 rounded-full" />
-                          <span>{highlight}</span>
-                        </motion.li>
-                      ),
-                    )}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.technologies.map((tech: string, techIdx: number) => (
-                    <motion.span
-                      key={techIdx}
-                      whileHover={{ scale: 1.05 }}
-                      className={`inline-flex items-center rounded-full border border-white/10 bg-gradient-to-r ${project.accent} bg-clip-text px-3 py-1 text-sm font-medium text-transparent`}
-                    >
-                      {tech}
-                    </motion.span>
+              <div className="col-span-10 md:col-span-7">
+                <h3 className="text-ink group-hover:text-signal font-display text-h3 transition-colors duration-[180ms]">
+                  {project.title}
+                </h3>
+                <p className="text-ink-muted text-label mt-1 font-mono uppercase">
+                  {project.subtitle}
+                </p>
+                <p className="text-ink-secondary text-body mt-4 max-w-[62ch]">
+                  {project.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <Tag key={tech}>{tech}</Tag>
                   ))}
                 </div>
               </div>
-            </motion.article>
-          </motion.li>
+
+              <p className="text-ink-muted text-label col-span-12 font-mono uppercase md:col-span-4 md:text-right">
+                {project.period}
+              </p>
+
+              {/* ponytail: hidden below lg rather than tap-to-reveal — no
+                  hover state exists to reveal it on touch anyway; add an
+                  explicit expand control if mobile users need the visual. */}
+              <div
+                className="text-ink-muted pointer-events-none absolute top-1/2 right-6 hidden w-40 -translate-y-1/2 opacity-0 transition-[opacity,transform] duration-[180ms] ease-[var(--ease-decisive)] group-hover:scale-105 group-hover:opacity-100 lg:block lg:w-56"
+                aria-hidden="true"
+              >
+                <ProjectGraphic seed={idx} className="h-auto w-full" />
+              </div>
+            </div>
+          </li>
         ))}
-      </motion.ul>
-    </motion.section>
+      </ul>
+    </div>
   );
 }

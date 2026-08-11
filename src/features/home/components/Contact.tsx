@@ -1,285 +1,71 @@
-"use client";
-import { motion } from "framer-motion";
-import { Mail, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { useState } from "react";
-import type {
-  ContactContent,
-  ContactMethod,
-  SocialLink,
-  IconMap,
-} from "../types";
+import { ArrowUpRight } from "lucide-react";
+import { SectionHeading } from "@/components/layout/SectionHeading";
+import type { ContactContent } from "../types";
 
 export function Contact({ content }: { content?: ContactContent }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const contactMethods = content?.contactMethods ?? [];
+  const socialLinks = content?.socialLinks ?? [];
 
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const { name, email, message } = formData;
-    const subject = encodeURIComponent(
-      `Portfolio Contact from ${name || email}`,
-    );
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    );
-    const toEmail =
-      contactMethods?.[0]?.value ?? "andrzej.pruszynski90@gmail.com";
-    const mailtoLink = `mailto:${toEmail}?subject=${subject}&body=${body}`;
-
-    window.location.href = mailtoLink;
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: "", email: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
-  };
-
-  const contactMethods: ContactMethod[] = content?.contactMethods ?? [];
-  const socialLinks: SocialLink[] = content?.socialLinks ?? [];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
+  // Plain mono link list, deduped by href — LinkedIn is listed in both
+  // contactMethods and socialLinks in the content file.
+  const links = [
+    ...contactMethods.map((m) => ({
+      label: m.label,
+      value: m.value,
+      href: m.href,
+    })),
+    ...socialLinks
+      .filter((s) => !contactMethods.some((m) => m.href === s.href))
+      .map((s) => ({
+        label: s.label,
+        value: s.href.replace(/^https?:\/\//, ""),
+        href: s.href,
+      })),
+  ];
 
   return (
-    <motion.section
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      className="space-y-12"
-      aria-labelledby="contact-heading"
-    >
-      {/* Header */}
-      <motion.div variants={itemVariants} className="space-y-4 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
-          <Sparkles size={16} className="text-pink-600" />
-          <span className="text-foreground/60 text-sm">
-            {content?.header?.badge ?? "Get In Touch"}
-          </span>
-        </div>
-        <h2
-          id="contact-heading"
-          className="text-4xl font-bold tracking-tight md:text-5xl"
-        >
-          {content?.header?.title ?? "Let's Work Together"}
-        </h2>
-        <p className="text-foreground/60 mx-auto max-w-2xl text-lg">
-          {content?.header?.description ??
-            "Have a project in mind or want to chat? I'd love to hear from you. Reach out through any of these channels."}
-        </p>
-      </motion.div>
+    <div aria-labelledby="contact-heading">
+      <SectionHeading
+        id="contact"
+        eyebrow={content?.header?.badge ?? "Contact"}
+        title={content?.header?.title ?? "Let's Connect"}
+        description={content?.header?.description}
+      />
 
-      {/* Main Content Grid */}
-      <motion.div className="grid gap-12 lg:grid-cols-2">
-        {/* Contact Methods */}
-        <motion.div variants={itemVariants} className="space-y-6">
-          <h3 className="text-foreground text-2xl font-bold">Contact Info</h3>
-          <ul className="space-y-4" aria-label="Contact options">
-            {contactMethods.map((method: ContactMethod, idx: number) => {
-              const iconMap: IconMap = { Mail, MessageSquare };
-              const Icon = iconMap[method.icon] ?? Mail;
-              return (
-                <li key={idx} className="list-none">
-                  <motion.a
-                    href={method.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ x: 4 }}
-                    className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
-                    aria-label={`${method.label}: ${method.value}`}
-                  >
-                    <div
-                      className="flex-shrink-0 rounded-full bg-gradient-to-br from-pink-600/20 to-rose-600/20 p-3"
-                      aria-hidden="true"
-                    >
-                      <Icon size={24} className="text-white" />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-foreground/60 text-sm font-medium">
-                        {method.label}
-                      </p>
-                      <p className="text-foreground text-lg font-semibold break-all">
-                        {method.value}
-                      </p>
-                    </div>
-                    <ArrowRight
-                      size={20}
-                      aria-hidden="true"
-                      className="text-foreground/30 group-hover:text-foreground/60 ml-auto flex-shrink-0 transition-all group-hover:translate-x-1"
-                    />
-                  </motion.a>
-                </li>
-              );
-            })}
-          </ul>
-          {/* Social Links */}
-          <div className="pt-6">
-            <h3 className="text-foreground mb-4 text-lg font-semibold">
-              Connect On Social
-            </h3>
-            <ul className="flex gap-4" aria-label="Social links">
-              {socialLinks.map((social: SocialLink, idx: number) => {
-                const iconMap: IconMap = { FaGithub, FaLinkedin };
-                const Icon = iconMap[social.icon] ?? FaGithub;
-                return (
-                  <li key={idx} className="list-none">
-                    <motion.a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`text-foreground/60 rounded-full p-3 transition-all hover:bg-slate-100 dark:hover:bg-white/10 ${social.color ?? ""}`}
-                      aria-label={social.label}
-                    >
-                      <Icon size={24} aria-hidden="true" />
-                    </motion.a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </motion.div>
-
-        {/* Contact Form */}
-        <motion.div variants={itemVariants}>
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
-          >
-            <h3 className="text-foreground text-2xl font-bold">
-              Send Me a Message
-            </h3>
-
-            {/* Name Field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="contact-name"
-                className="text-foreground/80 block text-sm font-medium"
-              >
-                Your Name
-              </label>
-              <input
-                id="contact-name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                autoComplete="name"
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
-                placeholder="John Doe"
-              />
-            </div>
-
-            {/* Email Field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="contact-email"
-                className="text-foreground/80 block text-sm font-medium"
-              >
-                Your Email
-              </label>
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                autoComplete="email"
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
-                placeholder="john@example.com"
-              />
-            </div>
-
-            {/* Message Field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="contact-message"
-                className="text-foreground/80 block text-sm font-medium"
-              >
-                Message
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                autoComplete="off"
-                className="text-foreground placeholder-foreground/40 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-all focus:border-slate-300 focus:bg-slate-100 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:focus:border-white/30 dark:focus:bg-white/10"
-                placeholder="Tell me about your project..."
-              />
-            </div>
-
-            {/* Submit Button */}
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full rounded-lg bg-gradient-to-r from-pink-600 to-rose-600 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
-              disabled={submitted}
+      <ul className="border-hairline mt-16 border-t" aria-label="Contact links">
+        {links.map((link) => (
+          <li key={link.href} className="border-hairline border-b">
+            <a
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={
+                link.href.startsWith("http") ? "noopener noreferrer" : undefined
+              }
+              className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 py-8"
             >
-              {submitted ? (
-                <span className="flex items-center justify-center gap-2">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="h-4 w-4 rounded-full border-2 border-white border-t-transparent"
-                  />
-                  Sending...
-                </span>
-              ) : (
-                "Send Message"
-              )}
-            </motion.button>
+              <span className="text-ink-muted text-label font-mono uppercase">
+                {link.label}
+              </span>
+              <span className="text-ink group-hover:text-signal font-display text-h3 flex max-w-full items-center gap-3 text-right break-all transition-colors duration-[120ms]">
+                {link.value}
+                <ArrowUpRight
+                  size={20}
+                  aria-hidden="true"
+                  className="shrink-0"
+                />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
 
-            {submitted && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="rounded-lg border border-green-600/50 bg-green-600/20 p-4 text-center text-sm font-medium text-green-600"
-                role="status"
-                aria-live="polite"
-              >
-                ✓ Message sent successfully!
-              </motion.div>
-            )}
-          </form>
-        </motion.div>
-      </motion.div>
-    </motion.section>
+      <a
+        href="/Andrzej_Pruszynski_CV.pdf"
+        download
+        className="border-hairline text-ink shadow-raised hover:border-strong hover:shadow-raised-hover text-body-sm mt-12 inline-block rounded-md border px-6 py-3 font-medium transition-all duration-[120ms]"
+      >
+        Download CV
+      </a>
+    </div>
   );
 }

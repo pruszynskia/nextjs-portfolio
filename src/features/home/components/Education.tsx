@@ -1,88 +1,48 @@
-"use client";
-import { motion } from "framer-motion";
-import { GraduationCap, Sparkles } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { staggerContainer, fadeInUp, cardReveal } from "@/lib/animations";
-import type { EducationContent, EducationItem, IconMap } from "../types";
+import { GraduationCap } from "lucide-react";
+import { SectionHeading } from "@/components/layout/SectionHeading";
+import type { EducationContent, EducationItem } from "../types";
 
 export function Education({ content }: { content?: EducationContent }) {
-  const educationData: EducationItem[] = content?.items ?? [];
+  const items: EducationItem[] = content?.items ?? [];
 
   return (
-    <motion.section
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className="space-y-12"
-      aria-labelledby="education-heading"
-    >
-      {/* Header */}
-      <motion.div variants={fadeInUp} className="space-y-4">
-        <SectionHeader
-          badge={
-            <>
-              <Sparkles size={16} className="text-indigo-600" />
-              <span className="text-foreground/60 text-sm">
-                {content?.header?.badge ?? "Education"}
-              </span>
-            </>
-          }
-          title={content?.header?.title ?? "Continuous Learning"}
-          description={
-            content?.header?.description ??
-            "Self-taught Frontend Developer with strong project ownership, detail-driven execution, and a civil engineering architecture background that brings disciplined design thinking to modern UI work."
-          }
-        />
-      </motion.div>
+    <div aria-labelledby="education-heading">
+      <SectionHeading
+        id="education"
+        eyebrow={content?.header?.badge ?? "Education"}
+        title={content?.header?.title ?? "Background"}
+        description={content?.header?.description}
+      />
 
-      {/* Timeline */}
-      <motion.ul className="space-y-6" aria-label="Education timeline">
-        {educationData.map((edu: EducationItem, index: number) => {
-          const iconMap: IconMap = { GraduationCap };
-          const Icon = iconMap[edu.icon] ?? GraduationCap;
-          return (
-            <motion.li key={index} variants={cardReveal} className="list-none">
-              <motion.article
-                whileHover={{ x: 8 }}
-                className="group relative flex gap-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 backdrop-blur-sm transition-all hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
-              >
-                {/* Timeline line */}
-                {index < educationData.length - 1 && (
-                  <div className="absolute top-full left-8 h-6 w-0.5 bg-gradient-to-b from-white/20 to-transparent" />
-                )}
+      <ul className="border-hairline mt-16 border-t" aria-label="Education">
+        {items.map((edu) => (
+          <li
+            key={edu.title}
+            className="border-hairline grid grid-cols-12 gap-6 border-b py-12 md:py-16"
+          >
+            <div className="col-span-12 flex items-center gap-4 md:col-span-4">
+              <GraduationCap
+                size={22}
+                className="text-ink-muted"
+                aria-hidden="true"
+              />
+              <p className="text-ink-muted text-label font-mono uppercase">
+                {edu.year}
+              </p>
+            </div>
 
-                {/* Icon */}
-                <div className="flex-shrink-0">
-                  <div className="inline-flex rounded-full bg-gradient-to-br from-indigo-600/20 to-purple-600/20 p-4">
-                    <Icon size={28} className="text-white" />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-foreground text-xl font-bold">
-                        {edu.title}
-                      </h3>
-                      <p className="text-foreground/60 text-sm font-medium">
-                        {edu.institution}
-                      </p>
-                    </div>
-                    <span className="text-foreground/70 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold whitespace-nowrap dark:bg-white/10">
-                      {edu.year}
-                    </span>
-                  </div>
-                  <p className="text-foreground/70 leading-relaxed">
-                    {edu.description}
-                  </p>
-                </div>
-              </motion.article>
-            </motion.li>
-          );
-        })}
-      </motion.ul>
-    </motion.section>
+            <div className="col-span-12 md:col-span-8">
+              <h3 className="text-ink font-display text-h3">{edu.title}</h3>
+              <p className="text-ink-secondary text-label mt-2 font-mono uppercase">
+                {edu.institution}
+              </p>
+              <p className="text-ink-secondary text-body-lg mt-5 max-w-[68ch]">
+                {edu.description}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
