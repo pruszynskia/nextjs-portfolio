@@ -2,59 +2,45 @@ import type { SkillsContent } from "../types";
 
 export const skillsContent: SkillsContent = {
   header: {
-    badge: "Skills & Expertise",
-    title: "Core Frontend Expertise",
+    badge: "Skills",
+    title: "Core Expertise",
     description:
-      "Focused on building scalable, accessible web experiences with modern tooling, strong engineering fundamentals, and a product-minded approach.",
+      "Production frontend depth, the architecture judgment to back it, and an AI-assisted development workflow built from scratch.",
   },
   categories: [
     {
       title: "Frontend Development",
       description:
-        "React, Next.js, TypeScript, JavaScript, SSR, component architecture",
+        "React, Next.js, TypeScript, JavaScript ES6+, Tailwind CSS, component architecture",
       icon: "Code2",
-      gradient: "from-blue-600 to-cyan-600",
-      accent: "bg-blue-600/20",
     },
     {
-      title: "UI Systems",
+      title: "State & Data",
       description:
-        "Responsive UI, accessibility, design systems, reusable component libraries",
-      icon: "Palette",
-      gradient: "from-purple-600 to-pink-600",
-      accent: "bg-purple-600/20",
-    },
-    {
-      title: "Integration & Architecture",
-      description:
-        "REST APIs, GraphQL, Node.js, AEM integration, scalable frontend architecture",
+        "Zustand, Redux, React Query, GraphQL, REST, Supabase / PostgreSQL",
       icon: "Database",
-      gradient: "from-orange-600 to-red-600",
-      accent: "bg-orange-600/20",
     },
     {
-      title: "Performance & Optimization",
+      title: "Architecture & Systems",
       description:
-        "Core Web Vitals, code splitting, lazy loading, runtime performance tuning",
-      icon: "Zap",
-      gradient: "from-yellow-600 to-orange-600",
-      accent: "bg-yellow-600/20",
+        "Design systems and tokens, reusable component libraries, Feature-Sliced Architecture, clean architecture",
+      icon: "Layers",
+    },
+    {
+      title: "AI-Assisted Development",
+      description:
+        "Claude Code, MCP (Playwright), Anthropic API, OpenAI API, provider-agnostic AI service-layer design, Zod validation",
+      icon: "Cpu",
     },
     {
       title: "Delivery & DevOps",
-      description:
-        "CI/CD, Azure, Docker, deployment pipelines, environment management",
+      description: "Azure CI/CD, Vercel, GitHub Actions, Git",
       icon: "Cloud",
-      gradient: "from-cyan-600 to-blue-600",
-      accent: "bg-cyan-600/20",
     },
     {
-      title: "Engineering Practices",
-      description:
-        "Git, GitHub, testing, code reviews, maintainable frontend delivery",
-      icon: "GitBranch",
-      gradient: "from-green-600 to-emerald-600",
-      accent: "bg-green-600/20",
+      title: "Testing & Quality",
+      description: "Jest, Cypress, Enzyme, code review",
+      icon: "TestTube2",
     },
   ],
 };

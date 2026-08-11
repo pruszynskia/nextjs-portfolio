@@ -6,10 +6,10 @@ import { PageTransition } from "@/components/providers/PageTransition";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
+      attribute="data-theme"
+      defaultTheme="system"
       storageKey="theme"
-      enableSystem={false}
+      enableSystem
       themes={["dark", "light"]}
       disableTransitionOnChange
     >

@@ -1,218 +1,297 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/*
+  Editorial Grotesque — implementation of ~/claude/DESIGN-STYLE-GUIDE/tokens.css
+  Tier 1 primitives and Tier 2 semantic tokens live in :root / [data-theme].
+  @theme inline only *maps* them onto Tailwind utility namespaces.
 
-html {
-  scroll-behavior: smooth;
-}
-
-:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-}
-
-
+  Theme switching is driven by [data-theme] (next-themes attribute="data-theme"),
+  not a .dark class, so the tokens file transfers verbatim.
+*/
+@custom-variant dark (&:is([data-theme="dark"] *));
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* ---- type families ---- */
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* legacy alias: existing components use `font-heading` */
+  --font-heading: var(--font-archivo), system-ui, sans-serif;
+
+  /* ---- type scale (size / line-height / tracking / weight) ---- */
+  --text-label: 12px;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 500;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.5;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.5;
+
+  --text-lead: 20px;
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: -0.005em;
+  --text-lead--font-weight: 450;
+
+  --text-h3: clamp(24px, 2vw + 1rem, 28px);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h3--font-weight: 600;
+
+  --text-h2: clamp(32px, 3vw + 1rem, 40px);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 600;
+
+  --text-h1: clamp(44px, 5vw + 1rem, 60px);
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1--font-weight: 650;
+
+  --text-display: clamp(56px, 7vw + 1rem, 88px);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 650;
+
+  --text-hero: clamp(56px, 9vw + 1rem, 128px);
+  --text-hero--line-height: 1.1;
+  --text-hero--letter-spacing: -0.03em;
+  --text-hero--font-weight: 700;
+
+  /* ---- editorial colour names ---- */
+  --color-canvas: var(--surface-canvas);
+  --color-sunken: var(--surface-sunken);
+  --color-raised: var(--surface-raised);
+  --color-inverse: var(--surface-inverse);
+
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-inverse: var(--text-inverse);
+
+  --color-hairline: var(--border-hairline);
+  --color-strong: var(--border-strong);
+
+  --color-signal: var(--accent-bg);
+  --color-signal-fg: var(--accent-fg);
+  --color-signal-hover: var(--accent-hover);
+
+  /*
+    Legacy shadcn names remapped onto the ink ramp. Keeps Button/Card/Badge and
+    the not-yet-migrated sections coherent during phases 2-4 instead of shipping
+    an unstyled page between commits. Migrate usages to the editorial names above,
+    then delete this block.
+  */
+  --color-background: var(--surface-canvas);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--surface-raised);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--surface-raised);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--accent-bg);
+  --color-primary-foreground: var(--accent-fg);
+  --color-secondary: var(--surface-sunken);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--surface-sunken);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--surface-sunken);
+  --color-accent-foreground: var(--text-primary);
+  --color-destructive: var(--signal-600);
+  --color-border: var(--border-hairline);
+  --color-input: var(--border-hairline);
+  --color-ring: var(--focus-ring);
+
+  /* ---- radii: 8px is the ceiling (03/04 docs). Capping the whole legacy
+         scale here retires `rounded-2xl` everywhere without touching files. ---- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
+  --radius-3xl: 8px;
+  --radius-4xl: 8px;
+
+  /* ---- elevation: neutral emboss only, never accent-tinted ---- */
+  --shadow-raised: var(--shadow-raised-value);
+  --shadow-raised-hover: var(--shadow-raised-hover-value);
+  --shadow-inset: var(--shadow-inset-value);
+  --shadow-overlay: 0 24px 64px -16px rgb(11 11 12 / 0.45);
+
+  /* ---- motion ---- */
+  --ease-decisive: cubic-bezier(0.2, 0, 0, 1);
+
+  --container-editorial: 1440px;
 }
 
+/* ============================================================
+   Tier 1 primitives
+   ============================================================ */
 :root {
-  --background: #f5f5f7;
-  --foreground: #1d1d1f;
-  --card: #ffffff;
-  --card-foreground: #1d1d1f;
-  --popover: #ffffff;
-  --popover-foreground: #1d1d1f;
-  --primary: #0071e3;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f7;
-  --secondary-foreground: #1d1d1f;
-  --muted: #f5f5f7;
-  --muted-foreground: #6e6e73;
-  --accent: #f5f5f7;
-  --accent-foreground: #1d1d1f;
-  --destructive: #ff3b30;
-  --border: #d2d2d7;
-  --input: #f5f5f7;
-  --ring: #0071e3;
-  --chart-1: #5ac8fa;
-  --chart-2: #0071e3;
-  --chart-3: #34c759;
-  --chart-4: #ff9500;
-  --chart-5: #af52de;
-  --radius: 0.75rem;
-  --sidebar: #fbfbfd;
-  --sidebar-foreground: #1d1d1f;
-  --sidebar-primary: #0071e3;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5f5f7;
-  --sidebar-accent-foreground: #1d1d1f;
-  --sidebar-border: #d2d2d7;
-  --sidebar-ring: #0071e3;
+  --ink-0: #0b0b0c;
+  --ink-1: #131313;
+  --ink-2: #1b1b1b;
+  --ink-3: #262625;
+  --ink-4: #333231;
+  --ink-5: #4a4846;
+  --ink-6: #656260;
+  --ink-7: #837f7b;
+  --ink-8: #a8a39d;
+  --ink-9: #c7c1b8;
+  --ink-10: #ddd7cc;
+  --ink-11: #eae5da;
+  --ink-12: #f5f2ec;
+  --ink-13: #fbfaf7;
+
+  --signal-400: #ff7a47;
+  --signal-500: #ff5a2c;
+  --signal-600: #d93a0e;
+
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 280ms;
+  --dur-4: 440ms;
 }
 
-.dark {
-  --background: #0f1115;
-  --foreground: #f5f5f7;
-  --card: #1c1d22;
-  --card-foreground: #f5f5f7;
-  --popover: #1c1d22;
-  --popover-foreground: #f5f5f7;
-  --primary: #5ac8fa;
-  --primary-foreground: #08131a;
-  --secondary: #23252d;
-  --secondary-foreground: #f5f5f7;
-  --muted: #23252d;
-  --muted-foreground: #98989d;
-  --accent: #23252d;
-  --accent-foreground: #f5f5f7;
-  --destructive: #ff453a;
-  --border: #3a3d46;
-  --input: #2a2d35;
-  --ring: #5ac8fa;
-  --chart-1: #5ac8fa;
-  --chart-2: #0071e3;
-  --chart-3: #34c759;
-  --chart-4: #ff9500;
-  --chart-5: #af52de;
-  --sidebar: #16181d;
-  --sidebar-foreground: #f5f5f7;
-  --sidebar-primary: #5ac8fa;
-  --sidebar-primary-foreground: #08131a;
-  --sidebar-accent: #23252d;
-  --sidebar-accent-foreground: #f5f5f7;
-  --sidebar-border: #3a3d46;
-  --sidebar-ring: #5ac8fa;
+/* ============================================================
+   Tier 2 semantic — DARK (default before JS resolves the theme)
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  --surface-canvas: var(--ink-1);
+  --surface-sunken: var(--ink-0);
+  --surface-raised: var(--ink-3);
+  --surface-inverse: var(--ink-12);
+
+  --text-primary: var(--ink-12);
+  --text-secondary: var(--ink-9);
+  --text-muted: var(--ink-7);
+  --text-inverse: var(--ink-1);
+
+  --border-hairline: var(--ink-4);
+  --border-strong: var(--ink-6);
+
+  --accent-fg: var(--ink-0);
+  --accent-bg: var(--signal-500);
+  --accent-hover: var(--signal-400);
+  --focus-ring: var(--signal-500);
+
+  --shadow-raised-value:
+    inset 0 1px 0 rgb(255 255 255 / 0.06), 0 1px 2px rgb(0 0 0 / 0.4),
+    0 12px 24px -10px rgb(0 0 0 / 0.55);
+  --shadow-raised-hover-value:
+    inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.45),
+    0 16px 32px -10px rgb(0 0 0 / 0.6);
+  --shadow-inset-value:
+    inset 0 1px 3px rgb(0 0 0 / 0.5), inset 0 -1px 0 rgb(255 255 255 / 0.04);
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* ============================================================
+   Tier 2 semantic — LIGHT
+   ============================================================ */
+[data-theme="light"] {
+  --surface-canvas: var(--ink-12);
+  --surface-sunken: var(--ink-11);
+  --surface-raised: var(--ink-13);
+  --surface-inverse: var(--ink-1);
+
+  --text-primary: var(--ink-0);
+  --text-secondary: var(--ink-4);
+  --text-muted: var(--ink-6);
+  --text-inverse: var(--ink-12);
+
+  --border-hairline: var(--ink-9);
+  --border-strong: var(--ink-7);
+
+  --accent-fg: var(--ink-12);
+  --accent-bg: var(--signal-600);
+  --accent-hover: var(--signal-500);
+  --focus-ring: var(--signal-600);
+
+  --shadow-raised-value:
+    inset 0 1px 0 rgb(255 255 255 / 0.9), 0 1px 2px rgb(11 11 12 / 0.06),
+    0 12px 24px -12px rgb(11 11 12 / 0.16);
+  --shadow-raised-hover-value:
+    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 1px 2px rgb(11 11 12 / 0.08),
+    0 16px 32px -12px rgb(11 11 12 / 0.2);
+  --shadow-inset-value:
+    inset 0 1px 3px rgb(11 11 12 / 0.1), inset 0 -1px 0 rgb(255 255 255 / 0.6);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
+/* First paint, before next-themes writes [data-theme] */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --surface-canvas: var(--ink-12);
+    --surface-sunken: var(--ink-11);
+    --surface-raised: var(--ink-13);
+    --surface-inverse: var(--ink-1);
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 113, 227, 0.2); }
-  50% { box-shadow: 0 0 30px rgba(90, 200, 250, 0.35); }
-}
+    --text-primary: var(--ink-0);
+    --text-secondary: var(--ink-4);
+    --text-muted: var(--ink-6);
+    --text-inverse: var(--ink-12);
 
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
+    --border-hairline: var(--ink-9);
+    --border-strong: var(--ink-7);
+
+    --accent-fg: var(--ink-12);
+    --accent-bg: var(--signal-600);
+    --accent-hover: var(--signal-500);
+    --focus-ring: var(--signal-600);
+
+    --shadow-raised-value:
+      inset 0 1px 0 rgb(255 255 255 / 0.9), 0 1px 2px rgb(11 11 12 / 0.06),
+      0 12px 24px -12px rgb(11 11 12 / 0.16);
+    --shadow-raised-hover-value:
+      inset 0 1px 0 rgb(255 255 255 / 0.95), 0 1px 2px rgb(11 11 12 / 0.08),
+      0 16px 32px -12px rgb(11 11 12 / 0.2);
+    --shadow-inset-value:
+      inset 0 1px 3px rgb(11 11 12 / 0.1), inset 0 -1px 0 rgb(255 255 255 / 0.6);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring;
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border-hairline);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--surface-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-instrument), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
-    @apply outline-none;
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
   }
 
-  /* Responsive styles */
-  @media (max-width: 640px) {
-    body {
-      font-size: 14px;
-    }
+  ::selection {
+    background-color: var(--accent-bg);
+    color: var(--accent-fg);
   }
 
-  @media (min-width: 640px) and (max-width: 768px) {
-    body {
-      font-size: 15px;
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1024px) {
-    body {
-      font-size: 16px;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1280px) {
-    body {
-      font-size: 17px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    body {
-      font-size: 18px;
-    }
-  }
-
-  /* Dark mode specific styles */
-  .dark body {
-    background-color: var(--background);
-    color: var(--foreground);
-  }
-
-  .dark * {
-    @apply border-border outline-ring/50;
+  /* Prose measure cap (03-typography.md) */
+  p {
+    max-width: 68ch;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
+    html {
       scroll-behavior: auto;
     }
 
@@ -228,126 +307,24 @@ html {
 }
 
 @layer utilities {
-  /* Floating and motion animations */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  /* Archivo's width axis, expanded — headline runs >=40px only (03-typography.md) */
+  .font-expanded {
+    font-variation-settings: "wdth" 112;
   }
 
-  .animate-float-slow {
-    animation: float 4s ease-in-out infinite;
+  /* 12-col editorial grid: 1440px max, 24px gutter, asymmetric margins */
+  .grid-editorial {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    max-width: var(--container-editorial);
+    margin-inline: auto;
+    padding-inline: 16px;
   }
 
-  .animate-float-fast {
-    animation: float 2s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-
-  .animate-pulse-ring {
-    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  /* Gradient animations */
-  .gradient-animation {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-  }
-
-  /* Glass effect and transparencies */
-  .backdrop-blur-glass {
-    @apply backdrop-blur-md bg-white/10 dark:bg-white/5;
-  }
-
-  .glass-effect {
-    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl dark:border-white/20 dark:bg-white/10;
-  }
-
-  .glass-effect-strong {
-    @apply rounded-2xl border border-white/20 bg-white/20 backdrop-blur-xl dark:border-white/30 dark:bg-white/15;
-  }
-
-  /* Text effects */
-  .text-gradient {
-    @apply bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent;
-  }
-
-  /* Smooth transitions */
-  .transition-smooth {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .transition-smooth-fast {
-    @apply transition-all duration-200 ease-out;
-  }
-
-  .transition-smooth-slow {
-    @apply transition-all duration-500 ease-out;
-  }
-
-  .transition-transform-smooth {
-    @apply transition-transform duration-300 ease-out;
-  }
-
-  /* Focus states with smooth animation */
-  .focus-ring-smooth {
-    @apply outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
-  }
-
-  .focus-ring-inset {
-    @apply outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary;
-  }
-
-  /* Hover scale utilities with smooth animation */
-  .hover-lift {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-
-  .hover-scale-sm {
-    @apply transition-transform duration-300 hover:scale-102;
-  }
-
-  .hover-brightness {
-    @apply transition-all duration-300 hover:brightness-110;
-  }
-
-  /* Utilities for reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+  @media (min-width: 768px) {
+    .grid-editorial {
+      padding-inline: 32px;
     }
-  }
-
-  /* Performance optimizations */
-  .will-animate {
-    @apply will-change-transform;
-  }
-
-  .will-animate-opacity {
-    will-change: opacity;
-  }
-
-  /* Subtle backdrop and overlay effects */
-  .overlay-subtle {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-sm;
-  }
-
-  .overlay-heavy {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-lg;
-  }
-
-  /* Text selection styling */
-  .selection-smooth {
-    @apply selection:bg-primary/30 selection:text-foreground;
   }
 }

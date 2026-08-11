@@ -2,17 +2,31 @@
 
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { Geist } from "next/font/google";
+import { Archivo, Instrument_Sans, Geist_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/components/providers/Providers";
-import {
-  AmbientBackground,
-  ParticlesBackground,
-} from "@/components/animations/AmbientBackground";
 
-const geist = Geist({
+// Display — grotesque, width axis used expanded at hero sizes only
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-archivo",
+  axes: ["wdth"],
+  display: "swap",
+  preload: true,
+});
+
+// Text — body, UI labels, nav
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument",
+  display: "swap",
+  preload: true,
+});
+
+// Meta — numbers, dates, labels, tags
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
   display: "swap",
   preload: true,
 });
@@ -50,7 +64,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={cn("font-sans", geist.variable)}
+      className={cn(
+        archivo.variable,
+        instrumentSans.variable,
+        geistMono.variable,
+      )}
       suppressHydrationWarning
     >
       <head>
@@ -58,21 +76,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           name="format-detection"
           content="telephone=no, date=no, address=no, email=no"
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
       </head>
-      <body className="bg-background text-foreground min-h-screen overflow-x-hidden">
-        <div className="relative isolate min-h-screen overflow-hidden">
-          <AmbientBackground />
-          <ParticlesBackground />
-          <div className="relative z-10">
-            <Providers>{children}</Providers>
-          </div>
-        </div>
+      <body className="min-h-screen overflow-x-hidden">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

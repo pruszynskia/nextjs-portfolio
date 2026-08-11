@@ -1,168 +1,157 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X, Download } from "lucide-react";
-import { motion } from "framer-motion";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
+
+/*
+  Flat row, hairline bottom border, opaque surface — no blur, no glass, no shadow
+  on the bar, no background pill on the active item. Active state is a 2px accent
+  underline (05-components.md). Nav labels use the mono `label` role.
+*/
+const NAV_LINKS = [
+  { name: "About", id: "about" },
+  { name: "Experience", id: "experience" },
+  { name: "Projects", id: "projects" },
+  { name: "Skills", id: "skills" },
+  { name: "Contact", id: "contact" },
+];
 
 export function Navbar() {
-  const router = useRouter();
-  const { theme, setTheme } = useTheme();
-  const [hasMounted, setHasMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
+  // Scroll-spy: drives the accent underline. Cheaper and smoother than
+  // recomputing offsets on every scroll event.
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible) setActiveId(visible.target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+    );
+
+    NAV_LINKS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const id = window.setTimeout(() => setHasMounted(true), 0);
-    return () => window.clearTimeout(id);
-  }, []);
-
-  const isDarkMode = hasMounted ? theme === "dark" : true;
-
-  const toggleTheme = () => {
-    setTheme(isDarkMode ? "light" : "dark");
-  };
-
-  const handleHomeNavigation = (
-    event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
-  ) => {
-    event?.preventDefault();
-    setIsOpen(false);
-    router.push("/");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const navLinks = [
-    { name: "Home", href: "/", onClick: handleHomeNavigation },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ];
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <nav
       aria-label="Primary"
-      className={`fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-slate-200 bg-slate-50/95 backdrop-blur-md dark:border-white/5 dark:bg-black/80"
-          : "bg-transparent"
-      }`}
+      className="border-hairline bg-canvas fixed inset-x-0 top-0 z-50 border-b"
     >
-      <motion.a
-        href="/"
-        onClick={handleHomeNavigation}
-        whileHover={{ scale: 1.05 }}
-        className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-lg font-bold text-transparent"
-      >
-        AP
-      </motion.a>
-
-      <ul className="hidden gap-8 md:flex">
-        {navLinks.map((link, idx) => (
-          <li key={idx}>
-            <motion.a
-              href={link.href}
-              onClick={link.onClick}
-              className="text-foreground/80 hover:text-foreground relative text-sm font-medium transition-colors"
-              whileHover={{ y: -2 }}
-            >
-              {link.name}
-              <motion.div
-                className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-purple-600"
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center gap-3">
-        <motion.a
-          href="/Andrzej_Pruszynski_CV.pdf"
-          download
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="text-foreground/80 hover:text-foreground inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium transition-colors hover:border-slate-300 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10"
+      <div className="max-w-editorial mx-auto flex h-16 w-full items-center justify-between px-4 md:px-8">
+        <a
+          href="#home"
+          className="text-ink font-display text-body-lg font-semibold tracking-tight"
         >
-          <Download size={18} aria-hidden="true" />
-          Download CV
-        </motion.a>
+          Andrzej Pruszyński
+        </a>
 
-        <motion.button
-          type="button"
-          onClick={toggleTheme}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-foreground/60 hover:text-foreground rounded-full p-2 transition-colors hover:bg-slate-100 dark:hover:bg-white/5"
-          aria-label={
-            isDarkMode ? "Switch to light mode" : "Switch to dark mode"
-          }
-        >
-          {isDarkMode ? (
-            <Sun size={20} aria-hidden="true" />
-          ) : (
-            <Moon size={20} aria-hidden="true" />
-          )}
-        </motion.button>
-
-        <motion.button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-foreground/60 hover:text-foreground rounded-full p-2 transition-colors hover:bg-slate-100 md:hidden dark:hover:bg-white/5"
-          aria-expanded={isOpen}
-          aria-controls="mobile-navigation"
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-        >
-          {isOpen ? (
-            <X size={20} aria-hidden="true" />
-          ) : (
-            <Menu size={20} aria-hidden="true" />
-          )}
-        </motion.button>
-      </div>
-
-      <motion.div
-        id="mobile-navigation"
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: { opacity: 1, height: "auto" },
-          closed: { opacity: 0, height: 0 },
-        }}
-        transition={{ duration: 0.3 }}
-        className="absolute top-full right-0 left-0 overflow-hidden border-b border-slate-200 bg-slate-50 backdrop-blur-md md:hidden dark:border-white/5 dark:bg-black/80"
-      >
-        <ul className="flex flex-col gap-4 px-6 py-4">
-          {navLinks.map((link, idx) => (
-            <li key={idx}>
+        <ul className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <li key={link.id}>
               <a
-                href={link.href}
-                className="text-foreground/80 hover:text-foreground text-sm font-medium transition-colors"
-                onClick={(event) => {
-                  link.onClick?.(event);
-                }}
+                href={`#${link.id}`}
+                aria-current={activeId === link.id ? "true" : undefined}
+                className={`text-label relative block py-1 font-mono uppercase transition-colors duration-[120ms] ${
+                  activeId === link.id
+                    ? "text-ink"
+                    : "text-ink-muted hover:text-ink"
+                }`}
               >
                 {link.name}
+                {activeId === link.id && (
+                  <span
+                    className="bg-signal absolute -bottom-px left-0 h-[2px] w-full"
+                    aria-hidden="true"
+                  />
+                )}
               </a>
             </li>
           ))}
         </ul>
-      </motion.div>
-    </motion.nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="/Andrzej_Pruszynski_CV.pdf"
+            download
+            className="border-hairline text-ink hover:border-strong text-label hidden rounded-md border px-3 py-2 font-mono uppercase transition-colors duration-[120ms] sm:inline-block"
+          >
+            Download CV
+          </a>
+
+          {/* Icon swap is pure CSS off [data-theme], so there is no mount flag
+              and no hydration mismatch to guard against. */}
+          <button
+            type="button"
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+            className="text-ink-muted hover:text-ink rounded-md p-2 transition-colors duration-[120ms]"
+            aria-label="Toggle colour theme"
+          >
+            <Sun size={18} aria-hidden="true" className="hidden dark:block" />
+            <Moon size={18} aria-hidden="true" className="block dark:hidden" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-ink-muted hover:text-ink rounded-md p-2 transition-colors duration-[120ms] md:hidden"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={
+              isOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+          >
+            {isOpen ? (
+              <X size={18} aria-hidden="true" />
+            ) : (
+              <Menu size={18} aria-hidden="true" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div
+          id="mobile-navigation"
+          className="border-hairline bg-canvas border-t md:hidden"
+        >
+          <ul className="flex flex-col px-4 py-2">
+            {NAV_LINKS.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  onClick={() => setIsOpen(false)}
+                  className="text-ink-muted hover:text-ink text-label block py-3 font-mono uppercase transition-colors duration-[120ms]"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="/Andrzej_Pruszynski_CV.pdf"
+                download
+                className="text-ink-muted hover:text-ink text-label block py-3 font-mono uppercase transition-colors duration-[120ms]"
+              >
+                Download CV
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
   );
 }

@@ -2,37 +2,62 @@ import type { ProjectsContent } from "../types";
 
 export const projectsContent: ProjectsContent = {
   header: {
-    badge: "Featured Projects",
+    badge: "Projects",
     title: "Selected Work",
     description:
-      "Examples of frontend systems I’ve built and improved across startups, enterprise platforms, and high-growth products.",
+      "A self-built AI development platform, an AI-startup MVP, and an enterprise e-commerce system — three different scales of frontend ownership.",
   },
   items: [
     {
-      title: "Legal Assistant AI",
-      subtitle: "Xentropy.ai — Frontend Developer",
+      index: "01",
+      title: "AI Career OS",
+      subtitle: "Personal Product",
+      period: "2026 — Present",
       description:
-        "Delivered a production-ready MVP for an AI-powered legal assistant, helping the team validate demand and strengthen early product adoption.",
+        "A full-stack AI-powered job-search platform — CV parsing, job-match scoring, tailored CV and recruiter-message generation, and application tracking — built end to end and deployed live.",
       highlights: [
-        "Built the MVP in under 8 weeks to support fast product validation and early traction.",
-        "Shipped a conversational experience with clear UX patterns for non-technical users.",
-        "Improved frontend responsiveness and reliability for a fast-moving product.",
-        "Collaborated on experience quality and prompt design to strengthen trust in the product.",
+        "Designed a provider-agnostic AI service layer (Anthropic and OpenAI adapters behind one interface, Zod-validated output) so the product isn't locked to a single model vendor.",
+        "Built the data layer on Supabase with Row Level Security and owner-scoped access, structured for multi-tenancy without a rewrite.",
+        "Designed and built a custom Claude Code command pipeline — plan, implement, and verify against acceptance criteria via Playwright MCP in a correction loop — plus backlog-intake and milestone-generation commands.",
+        "Currently single-user; the AI development workflow, not user traction, is the point of this build.",
       ],
-      technologies: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"],
-      gradient: "from-blue-600/20 via-sky-600/20 to-blue-600/20",
-      accent: "from-blue-600 to-sky-500",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Tailwind CSS",
+        "Zustand",
+        "React Query",
+        "Anthropic API",
+        "OpenAI API",
+        "Claude Code",
+      ],
     },
     {
-      title: "E-commerce Platform",
-      subtitle: "TD Synnex / Stellarity — Senior Frontend Developer",
+      index: "02",
+      title: "Legal Assistant AI",
+      subtitle: "Freelance — Xentropy.ai",
+      period: "2024",
       description:
-        "Led frontend development for a large-scale commerce platform with multilingual workflows and complex product customization.",
+        "An AI-powered legal assistant for law firms and individual consumers, built and shipped as an MVP for an early-stage startup.",
       highlights: [
-        "Delivered critical UI features for a high-volume e-commerce platform across APAC markets.",
-        "Improved load performance and stability, reducing friction in high-value customer journeys.",
-        "Implemented AEM-driven content solutions and scalable state handling for multi-region delivery.",
-        "Modernized legacy modules and supported a major business renewal with reliable frontend execution.",
+        "Built the product landing page and a reusable component library alongside a junior UX designer.",
+        "Authored foundational build and component documentation for the team.",
+        "MVP launched and tested by two law firms and a small group of individual users.",
+      ],
+      technologies: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"],
+    },
+    {
+      index: "03",
+      title: "E-commerce Platform",
+      subtitle: "Senior Frontend Developer — TD SYNNEX",
+      period: "2023 — 2025",
+      description:
+        "Order tracking and renewals applications for a Fortune 500 B2B e-commerce and software-renewals platform, serving internal staff and business customers across APAC and the Americas.",
+      highlights: [
+        "Personally implemented ~80% of a business-critical order flow that retained an at-risk client contract for the international region.",
+        "Standardized state management on Zustand and introduced a component library later adopted by a second product team.",
+        "Became the organization's in-house AEM authority, integrating multilingual content across regions.",
       ],
       technologies: [
         "React",
@@ -42,28 +67,6 @@ export const projectsContent: ProjectsContent = {
         "Azure",
         "GraphQL",
       ],
-      gradient: "from-purple-600/20 via-pink-600/20 to-purple-600/20",
-      accent: "from-purple-600 to-pink-500",
-    },
-    {
-      title: "Job Board Platform",
-      subtitle: "Freelance — Frontend Developer",
-      description:
-        "Built a performant job board and supporting frontend applications with a focus on scalable architecture and user experience.",
-      highlights: [
-        "Developed a responsive job board experience optimized for performance and usability.",
-        "Created reusable frontend patterns and a maintainable architecture across multiple products.",
-        "Improved long-term scalability and delivery speed through stronger structure and component design.",
-      ],
-      technologies: [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "Performance Optimization",
-        "Frontend Architecture",
-      ],
-      gradient: "from-pink-600/20 via-orange-600/20 to-pink-600/20",
-      accent: "from-pink-600 to-orange-500",
     },
   ],
 };
