@@ -30,7 +30,7 @@ export function Projects({ content }: { content?: ProjectsContent }) {
         {projects.map((project, idx) => (
           <li
             key={project.index}
-            className="group border-hairline hover:border-strong hover:shadow-raised relative border-b transition-[border-color,box-shadow] duration-[180ms]"
+            className={`group border-hairline hover:border-strong hover:shadow-raised relative border-b transition-[border-color,box-shadow] duration-[180ms] ${idx < 3 ? "project-row-reveal" : ""}`}
           >
             <div className="max-w-editorial relative mx-auto grid grid-cols-12 items-center gap-x-6 gap-y-4 px-4 py-12 md:px-8 md:py-16">
               <span className="text-ink-muted text-label col-span-2 font-mono uppercase md:col-span-1">

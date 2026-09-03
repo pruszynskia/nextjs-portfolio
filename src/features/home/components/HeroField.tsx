@@ -2,8 +2,14 @@
   The page's single hero visual — a flat 2D texture per 01-principles.md Pillar 4.
   A dot-matrix field whose radius is driven by two overlapping falloffs, so the
   form reads as sculptural without being symmetrical. Deterministic (pure math on
-  indices, no randomness) so server and client render identically, and static —
-  no idle animation, per 06-motion.md.
+  indices, no randomness) so server and client render identically.
+
+  The field is banded by intensity into four <g> groups so each can carry its own
+  scroll-bound opacity via CSS `animation-timeline: view()` (globals.css) — outer/
+  faint dots dissolve first as the hero scrolls out, the accent core lingers
+  longest. Opacity only, no translate: this is not parallax and it never loops,
+  so it stays inside 06-motion.md's transform budget. Still a pure Server
+  Component — the motion is CSS-only, no client JS.
 */
 
 const COLS = 30;
@@ -20,8 +26,16 @@ function intensity(nx: number, ny: number): number {
   return Math.min(1, Math.max(a, b));
 }
 
+/** Band boundaries mirror the guide's opacity ramp; band 3 is the accent core. */
+function bandFor(t: number): 0 | 1 | 2 | 3 {
+  if (t > 0.92) return 3;
+  if (t > 0.65) return 2;
+  if (t > 0.4) return 1;
+  return 0;
+}
+
 export function HeroField({ className = "" }: { className?: string }) {
-  const dots = [];
+  const bands: React.ReactNode[][] = [[], [], [], []];
 
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
@@ -30,7 +44,8 @@ export function HeroField({ className = "" }: { className?: string }) {
 
       if (r < 0.25) continue;
 
-      dots.push(
+      const band = bandFor(t);
+      bands[band].push(
         <circle
           key={`${col}-${row}`}
           cx={col * GAP + GAP / 2}
@@ -38,8 +53,8 @@ export function HeroField({ className = "" }: { className?: string }) {
           r={Number(r.toFixed(2))}
           // The single accent moment on the page's visual — only the densest
           // core dots, keeping accent well inside the ~2% budget.
-          fill={t > 0.92 ? "var(--accent-bg)" : "currentColor"}
-          opacity={t > 0.92 ? 1 : Number((0.18 + 0.5 * t).toFixed(2))}
+          fill={band === 3 ? "var(--accent-bg)" : "currentColor"}
+          opacity={band === 3 ? 1 : Number((0.18 + 0.5 * t).toFixed(2))}
         />,
       );
     }
@@ -55,7 +70,11 @@ export function HeroField({ className = "" }: { className?: string }) {
       aria-hidden="true"
       focusable="false"
     >
-      {dots}
+      {bands.map((dots, band) => (
+        <g key={band} className={`hero-field-band hero-field-band-${band}`}>
+          {dots}
+        </g>
+      ))}
     </svg>
   );
 }
