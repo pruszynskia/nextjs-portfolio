@@ -1,7 +1,6 @@
 // src/app/providers/Providers.tsx
 
 import { ThemeProvider } from "next-themes";
-import { PageTransition } from "@/components/providers/PageTransition";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -13,7 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       themes={["dark", "light"]}
       disableTransitionOnChange
     >
-      <PageTransition>{children}</PageTransition>
+      {children}
     </ThemeProvider>
   );
 }

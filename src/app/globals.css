@@ -303,6 +303,18 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+
+    /*
+      animation-duration above does NOT stop a scroll-linked animation-timeline
+      — its progress comes from scroll position, not a clock. Drop straight to
+      the static end-state: fully resolved, no dissolve.
+    */
+    .hero-field-band,
+    .project-row-reveal {
+      animation: none !important;
+      animation-timeline: none !important;
+      opacity: 1 !important;
+    }
   }
 }
 
@@ -326,5 +338,72 @@
     .grid-editorial {
       padding-inline: 32px;
     }
+  }
+
+  /*
+    06-motion.md's flagship-adjacent moment, on permitted means only: opacity-only,
+    scroll-bound (not looping), no translate (not parallax). The hero dot field
+    resolves in as you arrive, dissolves as you scroll past — layered by band so
+    the accent core lingers longest. Progress is driven by the *page's* scroll,
+    not the small SVG's own visibility, so the timeline source is the section
+    that wraps HeroField (see Hero.tsx) rather than the default self view().
+  */
+  @keyframes hero-field-resolve {
+    0% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .hero-field-band {
+    animation: hero-field-resolve linear both;
+    animation-timeline: view();
+  }
+
+  /* Outer/faint band dissolves earliest, accent core (band-3) lingers longest. */
+  .hero-field-band-0 {
+    animation-range: entry 0% exit 55%;
+  }
+  .hero-field-band-1 {
+    animation-range: entry 0% exit 70%;
+  }
+  .hero-field-band-2 {
+    animation-range: entry 0% exit 85%;
+  }
+  .hero-field-band-3 {
+    animation-range: entry 0% exit 100%;
+  }
+
+  /*
+    Projects rows (05-components.md's signature list, the one full-bleed break
+    on the page) reuse the hero headline's own wipe language — same hard-edge
+    clip-path direction as HeroHeadline.tsx. `linear` here (not --ease-decisive)
+    because the curve on a scroll-timeline animation applies to scroll-progress
+    mapping, not time — easing that is what produces the mechanical rubber-band
+    feel this technique is meant to avoid. Applied to the first three rows only,
+    not every row: one-directional reveal-on-entry, no exit dissolve, so it
+    doesn't read as the banned mechanical fade-up.
+  */
+  @keyframes project-row-reveal {
+    from {
+      clip-path: inset(0 0 0 100%);
+    }
+    to {
+      clip-path: inset(0 0 0 0%);
+    }
+  }
+
+  .project-row-reveal {
+    animation: project-row-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 75%;
   }
 }
